@@ -11,34 +11,70 @@
   class="announcement-bar spacing-style section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }}"
   style="{% render 'spacing-padding', settings: section.settings %}; --border-bottom-width: {{ section.settings.divider_width }}px;"
 >
-  {% liquid
-    assign autoplay = false
-    assign show_arrows = false
-    if section.blocks.size > 1
-      assign autoplay = true
-      assign show_arrows = true
-    endif
-  %}
+  <div class="announcement-bar__layout">
+    {% liquid
+      assign autoplay = false
+      assign show_arrows = false
+      if section.blocks.size > 1
+        assign autoplay = true
+        assign show_arrows = true
+      endif
+    %}
 
-  <announcement-bar-component
-    class="announcement-bar__slider"
-    {% if autoplay == true %}
-      autoplay="{{ section.settings.speed }}" aria-live="polite"
-    {% endif %}
-  >
-    {% if show_arrows %}
-      {% render 'slideshow-arrows', icon_style: 'chevron' %}
-    {% endif %}
+    <announcement-bar-component
+      class="announcement-bar__slider"
+      {% if autoplay == true %}
+        autoplay="{{ section.settings.speed }}" aria-live="polite"
+      {% endif %}
+    >
+      {% if show_arrows %}
+        {% render 'slideshow-arrows', icon_style: 'chevron' %}
+      {% endif %}
 
-    <div class="announcement-bar__slides">
-      {% content_for 'blocks' %}
-    </div>
-  </announcement-bar-component>
+      <div class="announcement-bar__slides">
+        {% content_for 'blocks' %}
+      </div>
+    </announcement-bar-component>
+
+    {% unless section.settings.desktop_right_text == blank %}
+      <div
+        class="announcement-bar__right"
+        style="
+          --right-font: {{ section.settings.right_font }};
+          --right-font-size: {{ section.settings.right_font_size }};
+          --right-weight: {{ section.settings.right_weight }};
+          --right-letter-spacing: {{ section.settings.right_letter_spacing }};
+          --right-case: {{ section.settings.right_case }};
+        "
+      >
+        {% if section.settings.desktop_right_link != blank %}
+          <a href="{{ section.settings.desktop_right_link }}" class="announcement-bar__right-text">
+            {{ section.settings.desktop_right_text }}
+          </a>
+        {% else %}
+          <p class="announcement-bar__right-text">
+            {{ section.settings.desktop_right_text }}
+          </p>
+        {% endif %}
+      </div>
+    {% endunless %}
+  </div>
 </aside>
 
 {% stylesheet %}
   .announcement-bar {
     border-block-end: var(--border-bottom-width) solid var(--color-border);
+  }
+
+  .announcement-bar__layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    width: 100%;
+
+    @media screen and (min-width: 960px) {
+      grid-template-columns: 1fr auto 1fr;
+    }
   }
 
   .announcement-bar__slider {
@@ -119,6 +155,36 @@
     position: absolute;
     inset: 0;
   }
+
+  .announcement-bar__right {
+    display: none;
+
+    @media screen and (min-width: 960px) {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-inline-end: 0.5rem;
+      min-width: 0;
+    }
+  }
+
+  .announcement-bar__right-text {
+    margin: 0;
+    font-family: var(--right-font, var(--font-body--family));
+    font-size: var(--right-font-size, 0.75rem);
+    font-weight: var(--right-weight, normal);
+    letter-spacing: var(--right-letter-spacing, normal);
+    text-transform: var(--right-case, none);
+    color: var(--color-foreground);
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  a.announcement-bar__right-text:hover {
+    text-decoration: underline;
+  }
 {% endstylesheet %}
 
 {% schema %}
@@ -145,6 +211,79 @@
     {
       "type": "header",
       "content": "t:content.appearance"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "desktop_right_text",
+      "label": "t:settings.desktop_right_text"
+    },
+    {
+      "type": "url",
+      "id": "desktop_right_link",
+      "label": "t:settings.desktop_right_link"
+    },
+    {
+      "type": "select",
+      "id": "right_font",
+      "label": "t:settings.font",
+      "options": [
+        { "value": "var(--font-body--family)", "label": "t:options.body" },
+        { "value": "var(--font-heading--family)", "label": "t:options.heading" },
+        { "value": "var(--font-subheading--family)", "label": "t:options.subheading" },
+        { "value": "var(--font-accent--family)", "label": "t:options.accent" }
+      ],
+      "default": "var(--font-subheading--family)"
+    },
+    {
+      "type": "select",
+      "id": "right_font_size",
+      "label": "t:settings.font_size",
+      "options": [
+        { "value": "0.625rem", "label": "10px" },
+        { "value": "0.75rem", "label": "12px" },
+        { "value": "0.875rem", "label": "14px" },
+        { "value": "1rem", "label": "16px" }
+      ],
+      "default": "0.75rem"
+    },
+    {
+      "type": "select",
+      "id": "right_weight",
+      "label": "t:settings.weight",
+      "options": [
+        { "value": "", "label": "t:options.default" },
+        { "value": "300", "label": "t:options.light" },
+        { "value": "400", "label": "t:options.regular" },
+        { "value": "500", "label": "t:options.medium" },
+        { "value": "600", "label": "t:options.semibold" },
+        { "value": "700", "label": "t:options.bold" }
+      ],
+      "default": ""
+    },
+    {
+      "type": "select",
+      "id": "right_letter_spacing",
+      "label": "t:settings.letter_spacing",
+      "options": [
+        { "value": "normal", "label": "t:options.default" },
+        { "value": "0.04em", "label": "0.04em" },
+        { "value": "0.06em", "label": "0.06em" },
+        { "value": "0.1em", "label": "0.1em" },
+        { "value": "0.2em", "label": "0.2em" }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "select",
+      "id": "right_case",
+      "label": "t:settings.case",
+      "options": [
+        { "value": "none", "label": "t:options.default" },
+        { "value": "uppercase", "label": "t:options.uppercase" },
+        { "value": "lowercase", "label": "t:options.lowercase" },
+        { "value": "capitalize", "label": "t:options.capitalize" }
+      ],
+      "default": "none"
     },
     {
       "type": "select",

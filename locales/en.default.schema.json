@@ -842,6 +842,8 @@
     "default_logo": "Default logo",
     "desktop_height": "Desktop height",
     "desktop_pagination": "Desktop pagination",
+    "desktop_right_link": "Desktop right link",
+    "desktop_right_text": "Desktop right text",
     "direction": "Direction",
     // Button appearance for email signup form
     "display": "Display",
@@ -878,6 +880,7 @@
     "flag": "Flag",
     "font": "Font",
     "font_family": "Font family",
+    "font_size": "Font size",
     "font_price": "Price font",
     "font_weight": "Font weight",
     "full_width_first_image": "Full width first image",
