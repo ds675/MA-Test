@@ -143,6 +143,8 @@
     "thumbnails": "Thumbnails",
     "transparent_background": "Transparent background",
     "typography": "Typography",
+    "desktop_typography": "Desktop typography",
+    "mobile_typography": "Mobile typography",
     "typography_primary": "Primary typography",
     "typography_secondary": "Secondary typography",
     "typography_tertiary": "Tertiary typography",

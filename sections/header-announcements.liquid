@@ -9,7 +9,20 @@
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
 <aside
   class="announcement-bar spacing-style section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }}"
-  style="{% render 'spacing-padding', settings: section.settings %}; --border-bottom-width: {{ section.settings.divider_width }}px;"
+  style="
+    {% render 'spacing-padding', settings: section.settings %};
+    --border-bottom-width: {{ section.settings.divider_width }}px;
+    --announcement-desktop-font: {{ section.settings.desktop_font }};
+    --announcement-desktop-font-size: {{ section.settings.desktop_font_size }};
+    --announcement-desktop-weight: {{ section.settings.desktop_weight }};
+    --announcement-desktop-letter-spacing: {{ section.settings.desktop_letter_spacing }};
+    --announcement-desktop-case: {{ section.settings.desktop_case }};
+    --announcement-mobile-font: {{ section.settings.mobile_font }};
+    --announcement-mobile-font-size: {{ section.settings.mobile_font_size }};
+    --announcement-mobile-weight: {{ section.settings.mobile_weight }};
+    --announcement-mobile-letter-spacing: {{ section.settings.mobile_letter_spacing }};
+    --announcement-mobile-case: {{ section.settings.mobile_case }};
+  "
 >
   <div class="announcement-bar__layout">
     {% liquid
@@ -37,16 +50,7 @@
     </announcement-bar-component>
 
     {% unless section.settings.desktop_right_text == blank %}
-      <div
-        class="announcement-bar__right"
-        style="
-          --right-font: {{ section.settings.right_font }};
-          --right-font-size: {{ section.settings.right_font_size }};
-          --right-weight: {{ section.settings.right_weight }};
-          --right-letter-spacing: {{ section.settings.right_letter_spacing }};
-          --right-case: {{ section.settings.right_case }};
-        "
-      >
+      <div class="announcement-bar__right">
         {% if section.settings.desktop_right_link != blank %}
           <a href="{{ section.settings.desktop_right_link }}" class="announcement-bar__right-text">
             {{ section.settings.desktop_right_text }}
@@ -64,6 +68,21 @@
 {% stylesheet %}
   .announcement-bar {
     border-block-end: var(--border-bottom-width) solid var(--color-border);
+    --announcement-font: var(--announcement-mobile-font, var(--font-body--family));
+    --announcement-font-size: var(--announcement-mobile-font-size, 0.75rem);
+    --announcement-weight: var(--announcement-mobile-weight, normal);
+    --announcement-letter-spacing: var(--announcement-mobile-letter-spacing, normal);
+    --announcement-case: var(--announcement-mobile-case, none);
+  }
+
+  @media screen and (min-width: 960px) {
+    .announcement-bar {
+      --announcement-font: var(--announcement-desktop-font, var(--font-body--family));
+      --announcement-font-size: var(--announcement-desktop-font-size, 0.75rem);
+      --announcement-weight: var(--announcement-desktop-weight, normal);
+      --announcement-letter-spacing: var(--announcement-desktop-letter-spacing, normal);
+      --announcement-case: var(--announcement-desktop-case, none);
+    }
   }
 
   .announcement-bar__layout {
@@ -94,6 +113,11 @@
     width: calc(100% - var(--button-size) * 2);
     max-width: 680px;
     margin-inline: auto;
+    font-family: var(--announcement-font);
+    font-size: var(--announcement-font-size);
+    font-weight: var(--announcement-weight);
+    letter-spacing: var(--announcement-letter-spacing);
+    text-transform: var(--announcement-case);
   }
 
   .announcement-bar__slides > * {
@@ -163,18 +187,17 @@
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      padding-inline-end: 0.5rem;
       min-width: 0;
     }
   }
 
   .announcement-bar__right-text {
     margin: 0;
-    font-family: var(--right-font, var(--font-body--family));
-    font-size: var(--right-font-size, 0.75rem);
-    font-weight: var(--right-weight, normal);
-    letter-spacing: var(--right-letter-spacing, normal);
-    text-transform: var(--right-case, none);
+    font-family: var(--announcement-font);
+    font-size: var(--announcement-font-size);
+    font-weight: var(--announcement-weight);
+    letter-spacing: var(--announcement-letter-spacing);
+    text-transform: var(--announcement-case);
     color: var(--color-foreground);
     text-decoration: none;
     white-space: nowrap;
@@ -223,49 +246,59 @@
       "label": "t:settings.desktop_right_link"
     },
     {
+      "type": "header",
+      "content": "t:content.desktop_typography"
+    },
+    {
       "type": "select",
-      "id": "right_font",
+      "id": "desktop_font",
       "label": "t:settings.font",
       "options": [
         { "value": "var(--font-body--family)", "label": "t:options.body" },
-        { "value": "var(--font-heading--family)", "label": "t:options.heading" },
         { "value": "var(--font-subheading--family)", "label": "t:options.subheading" },
+        { "value": "var(--font-heading--family)", "label": "t:options.heading" },
         { "value": "var(--font-accent--family)", "label": "t:options.accent" }
       ],
       "default": "var(--font-subheading--family)"
     },
     {
       "type": "select",
-      "id": "right_font_size",
-      "label": "t:settings.font_size",
+      "id": "desktop_font_size",
+      "label": "t:settings.size",
       "options": [
         { "value": "0.625rem", "label": "10px" },
         { "value": "0.75rem", "label": "12px" },
         { "value": "0.875rem", "label": "14px" },
-        { "value": "1rem", "label": "16px" }
+        { "value": "1rem", "label": "16px" },
+        { "value": "1.125rem", "label": "18px" },
+        { "value": "1.25rem", "label": "20px" },
+        { "value": "1.5rem", "label": "24px" },
+        { "value": "2rem", "label": "32px" }
       ],
       "default": "0.75rem"
     },
     {
       "type": "select",
-      "id": "right_weight",
+      "id": "desktop_weight",
       "label": "t:settings.weight",
       "options": [
         { "value": "", "label": "t:options.default" },
+        { "value": "100", "label": "t:options.thin" },
         { "value": "300", "label": "t:options.light" },
         { "value": "400", "label": "t:options.regular" },
         { "value": "500", "label": "t:options.medium" },
         { "value": "600", "label": "t:options.semibold" },
-        { "value": "700", "label": "t:options.bold" }
+        { "value": "700", "label": "t:options.bold" },
+        { "value": "900", "label": "t:options.black" }
       ],
       "default": ""
     },
     {
       "type": "select",
-      "id": "right_letter_spacing",
+      "id": "desktop_letter_spacing",
       "label": "t:settings.letter_spacing",
       "options": [
-        { "value": "normal", "label": "t:options.default" },
+        { "value": "normal", "label": "t:options.normal" },
         { "value": "0.04em", "label": "0.04em" },
         { "value": "0.06em", "label": "0.06em" },
         { "value": "0.1em", "label": "0.1em" },
@@ -275,7 +308,78 @@
     },
     {
       "type": "select",
-      "id": "right_case",
+      "id": "desktop_case",
+      "label": "t:settings.case",
+      "options": [
+        { "value": "none", "label": "t:options.default" },
+        { "value": "uppercase", "label": "t:options.uppercase" },
+        { "value": "lowercase", "label": "t:options.lowercase" },
+        { "value": "capitalize", "label": "t:options.capitalize" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "header",
+      "content": "t:content.mobile_typography"
+    },
+    {
+      "type": "select",
+      "id": "mobile_font",
+      "label": "t:settings.font",
+      "options": [
+        { "value": "var(--font-body--family)", "label": "t:options.body" },
+        { "value": "var(--font-subheading--family)", "label": "t:options.subheading" },
+        { "value": "var(--font-heading--family)", "label": "t:options.heading" },
+        { "value": "var(--font-accent--family)", "label": "t:options.accent" }
+      ],
+      "default": "var(--font-subheading--family)"
+    },
+    {
+      "type": "select",
+      "id": "mobile_font_size",
+      "label": "t:settings.size",
+      "options": [
+        { "value": "0.625rem", "label": "10px" },
+        { "value": "0.75rem", "label": "12px" },
+        { "value": "0.875rem", "label": "14px" },
+        { "value": "1rem", "label": "16px" },
+        { "value": "1.125rem", "label": "18px" },
+        { "value": "1.25rem", "label": "20px" }
+      ],
+      "default": "0.75rem"
+    },
+    {
+      "type": "select",
+      "id": "mobile_weight",
+      "label": "t:settings.weight",
+      "options": [
+        { "value": "", "label": "t:options.default" },
+        { "value": "100", "label": "t:options.thin" },
+        { "value": "300", "label": "t:options.light" },
+        { "value": "400", "label": "t:options.regular" },
+        { "value": "500", "label": "t:options.medium" },
+        { "value": "600", "label": "t:options.semibold" },
+        { "value": "700", "label": "t:options.bold" },
+        { "value": "900", "label": "t:options.black" }
+      ],
+      "default": ""
+    },
+    {
+      "type": "select",
+      "id": "mobile_letter_spacing",
+      "label": "t:settings.letter_spacing",
+      "options": [
+        { "value": "normal", "label": "t:options.normal" },
+        { "value": "0.04em", "label": "0.04em" },
+        { "value": "0.06em", "label": "0.06em" },
+        { "value": "0.1em", "label": "0.1em" },
+        { "value": "0.2em", "label": "0.2em" }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "select",
+      "id": "mobile_case",
       "label": "t:settings.case",
       "options": [
         { "value": "none", "label": "t:options.default" },

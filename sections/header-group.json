@@ -18,12 +18,7 @@
           "type": "_announcement",
           "settings": {
             "text": "Welcome to our store",
-            "link": "",
-            "font": "var(--font-subheading--family)",
-            "font_size": "0.75rem",
-            "weight": "",
-            "letter_spacing": "normal",
-            "case": "none"
+            "link": ""
           },
           "blocks": {}
         }
@@ -35,16 +30,21 @@
       "settings": {
         "speed": 5,
         "section_width": "page-width",
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-4",
         "divider_width": 1,
         "padding-block-start": 15,
         "padding-block-end": 15,
         "desktop_right_text": "Need help? <strong>Contact us<\/strong>",
-        "right_font": "var(--font-subheading--family)",
-        "right_font_size": "0.75rem",
-        "right_weight": "",
-        "right_letter_spacing": "normal",
-        "right_case": "none"
+        "desktop_font": "var(--font-subheading--family)",
+        "desktop_font_size": "0.75rem",
+        "desktop_weight": "",
+        "desktop_letter_spacing": "normal",
+        "desktop_case": "none",
+        "mobile_font": "var(--font-subheading--family)",
+        "mobile_font_size": "0.75rem",
+        "mobile_weight": "",
+        "mobile_letter_spacing": "normal",
+        "mobile_case": "none"
       }
     },
     "header_section": {
