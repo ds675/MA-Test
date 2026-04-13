@@ -17,7 +17,7 @@
         "announcement_BxgCk9": {
           "type": "_announcement",
           "settings": {
-            "text": "Welcome to our store",
+            "text": "Shop our latest arrivals!",
             "link": ""
           },
           "blocks": {}
@@ -37,12 +37,12 @@
         "desktop_right_text": "Need help? <strong>Contact us<\/strong>",
         "desktop_font": "var(--font-subheading--family)",
         "desktop_font_size": "0.75rem",
-        "desktop_weight": "",
+        "desktop_weight": "400",
         "desktop_letter_spacing": "normal",
         "desktop_case": "none",
         "mobile_font": "var(--font-subheading--family)",
         "mobile_font_size": "0.75rem",
-        "mobile_weight": "",
+        "mobile_weight": "400",
         "mobile_letter_spacing": "normal",
         "mobile_case": "none"
       }
