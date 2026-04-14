@@ -30,8 +30,8 @@
       "settings": {
         "speed": 5,
         "desktop_right_text": "Need help? <strong>Contact us</strong>",
-        "section_width": "page-width",
-        "color_scheme": "scheme-4",
+        "section_width": "full-width",
+        "color_scheme": "scheme-5",
         "divider_width": 1,
         "padding-block-start": 15,
         "padding-block-end": 15

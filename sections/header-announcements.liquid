@@ -68,6 +68,7 @@
 {% stylesheet %}
   .announcement-bar {
     border-block-end: var(--border-bottom-width) solid var(--color-border);
+    padding-inline: 12px;
     --announcement-font: var(--announcement-mobile-font, var(--font-body--family));
     --announcement-font-size: var(--announcement-mobile-font-size, 0.75rem);
     --announcement-weight: var(--announcement-mobile-weight, normal);
@@ -77,6 +78,7 @@
 
   @media screen and (min-width: 960px) {
     .announcement-bar {
+      padding-inline: 64px;
       --announcement-font: var(--announcement-desktop-font, var(--font-body--family));
       --announcement-font-size: var(--announcement-desktop-font-size, 0.75rem);
       --announcement-weight: var(--announcement-desktop-weight, normal);
