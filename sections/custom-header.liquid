@@ -4,6 +4,7 @@
   id="custom-header"
   class="custom-header{% if section.settings.enable_sticky %} custom-header--sticky{% endif %}"
   data-section-id="{{ section.id }}"
+  data-search-url="{{ routes.search_url }}.json"
 >
   {%- comment -%} ===== MAIN HEADER ROW ===== {%- endcomment -%}
   <div class="custom-header__main">
@@ -76,6 +77,22 @@
 
     {%- comment -%} Right actions {%- endcomment -%}
     <div class="custom-header__right">
+      {%- comment -%} Mobile search toggle button {%- endcomment -%}
+      <button
+        class="custom-header__mobile-search-toggle"
+        type="button"
+        aria-label="{{ 'sections.custom_header.open_search' | t }}"
+        on:click="/handleOpenMobileSearch"
+      >
+        <img
+          src="{{ 'search-streamline-sharp-streamline-material-free.svg' | asset_url }}"
+          alt=""
+          width="20"
+          height="20"
+          aria-hidden="true"
+        >
+      </button>
+
       {%- if section.settings.cta_text != blank -%}
         <a
           class="custom-header__cta-link"
@@ -266,7 +283,7 @@
       </button>
     </div>
 
-    <nav class="custom-header__drawer-nav" aria-label="{{ 'accessibility.header_navigation_label' | t }}">
+    <nav class="custom-header__drawer-nav" aria-label="{{ 'sections.custom_header.menu' | t }}">
       {%- if section.settings.main_menu != blank -%}
         {%- for link in linklists[section.settings.main_menu].links -%}
           <a href="{{ link.url }}" class="custom-header__drawer-link">

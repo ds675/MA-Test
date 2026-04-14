@@ -31,6 +31,7 @@ class CustomHeaderComponent extends Component {
     if (this.refs.mobileSearch) {
       this.refs.mobileSearch.setAttribute('data-active', '');
     }
+
     if (this.refs.mobileSearchInput) {
       this.refs.mobileSearchInput.focus();
     }
@@ -40,9 +41,11 @@ class CustomHeaderComponent extends Component {
     if (this.refs.mobileSearch) {
       this.refs.mobileSearch.removeAttribute('data-active');
     }
+
     if (this.refs.mobileSearchResults) {
       this.refs.mobileSearchResults.removeAttribute('data-visible');
     }
+
     if (this.refs.mobileSearchInput) {
       this.refs.mobileSearchInput.value = '';
     }
@@ -54,9 +57,11 @@ class CustomHeaderComponent extends Component {
     if (this.refs.drawer) {
       this.refs.drawer.setAttribute('data-active', '');
     }
+
     if (this.refs.drawerOverlay) {
       this.refs.drawerOverlay.setAttribute('data-active', '');
     }
+
     document.body.style.overflow = 'hidden';
 
     if (this.refs.drawerClose) {
@@ -68,9 +73,11 @@ class CustomHeaderComponent extends Component {
     if (this.refs.drawer) {
       this.refs.drawer.removeAttribute('data-active');
     }
+
     if (this.refs.drawerOverlay) {
       this.refs.drawerOverlay.removeAttribute('data-active');
     }
+
     document.body.style.overflow = '';
   }
 
@@ -122,7 +129,8 @@ class CustomHeaderComponent extends Component {
     resultsContainer.innerHTML = '<div class="custom-header__search-loading">Searching...</div>';
 
     try {
-      const searchUrl = `${window.Shopify?.routes?.root || '/'}search/suggest.json?q=${encodeURIComponent(query)}&resources[type]=product&resources[limit]=6`;
+      const searchRoot = this.dataset.searchUrl || `${window.Shopify?.routes?.root || '/'}search/suggest.json`;
+      const searchUrl = `${searchRoot}?q=${encodeURIComponent(query)}&resources[type]=product&resources[limit]=6`;
 
       const response = await fetch(searchUrl, {
         signal: this.#abortController.signal,
