@@ -82,7 +82,7 @@
   border: none;
   outline: none;
   background: transparent;
-  font-family: 'DM Sans', var(--font-body--family), sans-serif;
+  font-family: var(--font-body--family), sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
@@ -204,7 +204,7 @@
   border-radius: 20px;
   padding: 8px 16px;
   text-decoration: none;
-  font-family: 'DM Sans', var(--font-body--family), sans-serif;
+  font-family: var(--font-body--family), sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 20px;
@@ -230,7 +230,7 @@
   gap: 4px;
   text-decoration: none;
   color: #141414;
-  font-family: 'DM Sans', var(--font-body--family), sans-serif;
+  font-family: var(--font-body--family), sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
@@ -319,7 +319,7 @@
 }
 
 .custom-header__subheader-link {
-  font-family: 'DM Sans', var(--font-body--family), sans-serif;
+  font-family: var(--font-body--family), sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 20px;
@@ -338,7 +338,7 @@
 }
 
 .custom-header__promo-text {
-  font-family: 'Roboto', var(--font-body--family), sans-serif;
+  font-family: var(--font-body--family), sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 19px;
@@ -363,7 +363,7 @@
   padding: 8px 16px;
   background: linear-gradient(90deg, rgba(201, 216, 85, 1) 0%, rgba(105, 186, 134, 1) 49%, rgba(64, 141, 161, 1) 100%);
   text-decoration: none;
-  font-family: 'Roboto', var(--font-body--family), sans-serif;
+  font-family: var(--font-body--family), sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 17px;
@@ -438,7 +438,7 @@
   border: none;
   outline: none;
   background: transparent;
-  font-family: 'DM Sans', var(--font-body--family), sans-serif;
+  font-family: var(--font-body--family), sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;

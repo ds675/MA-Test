@@ -129,7 +129,7 @@ class CustomHeaderComponent extends Component {
     resultsContainer.innerHTML = '<div class="custom-header__search-loading">Searching...</div>';
 
     try {
-      const searchRoot = this.dataset.searchUrl || `${window.Shopify?.routes?.root || '/'}search/suggest.json`;
+      const searchRoot = this.dataset.searchUrl || `${window.Shopify?.routes?.root || '/'}search/suggest`;
       const searchUrl = `${searchRoot}?q=${encodeURIComponent(query)}&resources[type]=product&resources[limit]=6`;
 
       const response = await fetch(searchUrl, {
