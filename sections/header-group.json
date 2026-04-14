@@ -29,22 +29,12 @@
       "name": "t:names.announcement_bar",
       "settings": {
         "speed": 5,
+        "desktop_right_text": "Need help? <strong>Contact us</strong>",
         "section_width": "page-width",
         "color_scheme": "scheme-4",
         "divider_width": 1,
         "padding-block-start": 15,
-        "padding-block-end": 15,
-        "desktop_right_text": "Need help? <strong>Contact us<\/strong>",
-        "desktop_font": "var(--font-subheading--family)",
-        "desktop_font_size": "0.75rem",
-        "desktop_weight": "400",
-        "desktop_letter_spacing": "normal",
-        "desktop_case": "none",
-        "mobile_font": "var(--font-subheading--family)",
-        "mobile_font_size": "0.75rem",
-        "mobile_weight": "400",
-        "mobile_letter_spacing": "normal",
-        "mobile_case": "none"
+        "padding-block-end": 15
       }
     },
     "header_section": {
