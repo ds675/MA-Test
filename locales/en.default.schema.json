@@ -375,6 +375,7 @@
     // Layout option for displaying products in rows and columns
     "product_grid": "Grid",
     "product_grid_main": "Product grid",
+    "promo_bar": "Promo bar",
     "product_hotspots": "Product hotspots",
     "hotspot_product": "Hotspot",
     "product_image": "Product image",
@@ -824,6 +825,10 @@
     "content_alignment": "Content alignment",
     "content_direction": "Content direction",
     "content_position": "Content position",
+    "consultant_text": "Consultant text",
+    "consultant_name": "Consultant name",
+    "cta_text": "CTA text",
+    "cta_url": "CTA URL",
     "content_width": "Content width",
     "corner_radius": "Corner radius",
     "country_region": "Country/Region",
@@ -961,6 +966,7 @@
     "media_width": "Media width",
     "menu": "Menu",
     "minimum_height": "Minimum height",
+    "mobile_background_color": "Mobile background",
     "mobile_card_size": "Mobile card size",
     "mobile_columns": "Mobile columns",
     "mobile_height": "Mobile height",
@@ -1116,6 +1122,7 @@
     // Generic label for text-related settings (content or color)
     "text": "Text",
     // Text capitalization setting for typography (uppercase/lowercase)
+    "text_color": "Text color",
     "text_case": "Case",
     "text_hierarchy": "Text hierarchy",
     "text_label_case": "Text label case",

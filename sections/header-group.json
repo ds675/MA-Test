@@ -11,6 +11,17 @@
   "type": "header",
   "name": "t:names.header",
   "sections": {
+    "promo_bar": {
+      "type": "promo-bar",
+      "settings": {
+        "consultant_text": "Your Shop Consultant is ",
+        "consultant_name": "SHOP.COM",
+        "cta_text": "Start Your SHOP.COM Business",
+        "background_color": "#141414",
+        "mobile_background_color": "#2B2B2B",
+        "text_color": "#FFFFFF"
+      }
+    },
     "header_announcements_9jGBFp": {
       "type": "header-announcements",
       "blocks": {
@@ -112,6 +123,7 @@
     }
   },
   "order": [
+    "promo_bar",
     "header_announcements_9jGBFp",
     "header_section"
   ]
