@@ -34,6 +34,22 @@
       endif
     %}
 
+    {% unless section.settings.desktop_announcement_text == blank %}
+      <div class="announcement-bar__desktop-text">
+        <p class="announcement-bar__static-text">
+          {{ section.settings.desktop_announcement_text }}
+        </p>
+      </div>
+    {% endunless %}
+
+    {% unless section.settings.mobile_announcement_text == blank %}
+      <div class="announcement-bar__mobile-text">
+        <p class="announcement-bar__static-text">
+          {{ section.settings.mobile_announcement_text }}
+        </p>
+      </div>
+    {% endunless %}
+
     <announcement-bar-component
       class="announcement-bar__slider"
       {% if autoplay == true %}
@@ -79,8 +95,9 @@
   @media screen and (min-width: 960px) {
     .announcement-bar {
       padding-inline: 64px;
+      min-height: 35px;
       --announcement-font: var(--announcement-desktop-font, var(--font-body--family));
-      --announcement-font-size: var(--announcement-desktop-font-size, 0.75rem);
+      --announcement-font-size: var(--announcement-desktop-font-size, 0.875rem);
       --announcement-weight: var(--announcement-desktop-weight, normal);
       --announcement-letter-spacing: var(--announcement-desktop-letter-spacing, normal);
       --announcement-case: var(--announcement-desktop-case, none);
@@ -92,6 +109,8 @@
     grid-template-columns: 1fr;
     align-items: center;
     width: 100%;
+    max-width: 1920px;
+    margin-inline: auto;
 
     @media screen and (min-width: 960px) {
       grid-template-columns: 1fr auto 1fr;
@@ -104,8 +123,14 @@
     align-items: center;
     position: relative;
 
-    @media screen and (max-width: 749px) {
+    @media screen and (max-width: 959px) {
       grid-column: 1 / -1;
+    }
+  }
+
+  .announcement-bar__mobile-text + .announcement-bar__slider {
+    @media screen and (max-width: 959px) {
+      display: none;
     }
   }
 
@@ -207,8 +232,38 @@
     text-overflow: ellipsis;
   }
 
-  a.announcement-bar__right-text:hover {
+  a.announcement-bar__right-text {
     text-decoration: underline;
+  }
+
+  .announcement-bar__desktop-text {
+    display: none;
+
+    @media screen and (min-width: 960px) {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .announcement-bar__mobile-text {
+    display: block;
+
+    @media screen and (min-width: 960px) {
+      display: none;
+    }
+  }
+
+  .announcement-bar__static-text {
+    margin: 0;
+    font-family: var(--announcement-font);
+    font-size: var(--announcement-font-size);
+    font-weight: var(--announcement-weight);
+    letter-spacing: var(--announcement-letter-spacing);
+    text-transform: var(--announcement-case);
+    color: var(--color-foreground);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 {% endstylesheet %}
 
@@ -249,6 +304,16 @@
       "label": "t:settings.desktop_right_link"
     },
     {
+      "type": "inline_richtext",
+      "id": "desktop_announcement_text",
+      "label": "t:settings.desktop_announcement_text"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "mobile_announcement_text",
+      "label": "t:settings.mobile_announcement_text"
+    },
+    {
       "type": "header",
       "content": "t:content.desktop_typography"
     },
@@ -278,7 +343,7 @@
         { "value": "1.5rem", "label": "24px" },
         { "value": "2rem", "label": "32px" }
       ],
-      "default": "0.75rem"
+      "default": "0.875rem"
     },
     {
       "type": "select",

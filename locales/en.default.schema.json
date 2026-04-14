@@ -846,6 +846,8 @@
     "desktop_pagination": "Desktop pagination",
     "desktop_right_link": "Desktop right link",
     "desktop_right_text": "Desktop right text",
+    "desktop_announcement_text": "Desktop text",
+    "mobile_announcement_text": "Mobile text",
     "direction": "Direction",
     // Button appearance for email signup form
     "display": "Display",
