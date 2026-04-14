@@ -14,12 +14,13 @@
     "promo_bar": {
       "type": "promo-bar",
       "settings": {
-        "consultant_text": "Your Shop Consultant is ",
+        "consultant_text": "Your Shop Consultant is",
         "consultant_name": "SHOP.COM",
         "cta_text": "Start Your SHOP.COM Business",
+        "cta_url": "",
         "background_color": "#141414",
-        "mobile_background_color": "#2B2B2B",
-        "text_color": "#FFFFFF"
+        "mobile_background_color": "#2b2b2b",
+        "text_color": "#ffffff"
       }
     },
     "header_announcements_9jGBFp": {
@@ -42,6 +43,7 @@
       "block_order": [
         "announcement_BxgCk9"
       ],
+      "disabled": true,
       "name": "t:names.announcement_bar",
       "settings": {
         "speed": 5,
@@ -94,6 +96,7 @@
         "logo_position": "left",
         "menu_position": "left",
         "menu_row": "top",
+        "customer_account_menu": "customer-account-main-menu",
         "show_search": true,
         "search_position": "right",
         "search_row": "top",
@@ -110,6 +113,10 @@
         "divider_width": 0,
         "divider_size": "page-width",
         "border_width": 0,
+        "actions_display_style": "icon",
+        "actions_font_size": "0.875rem",
+        "actions_font": "body",
+        "actions_text_case": "none",
         "color_scheme_top": "scheme-1",
         "color_scheme_bottom": "",
         "color_scheme_transparent": "scheme-6",
