@@ -14,9 +14,9 @@
     "promo_bar": {
       "type": "promo-bar",
       "settings": {
-        "consultant_text": "Your Shop Consultant is",
-        "consultant_name": "SHOP.COM",
-        "cta_text": "Start Your SHOP.COM Business",
+        "left_text_desktop": "Your Shop Consultant is <strong>SHOP.COM</strong>",
+        "left_text_mobile": "Shop Consultant: <strong>SHOP.COM</strong>",
+        "promo_text": "Start Your SHOP.COM Business",
         "cta_url": "",
         "background_color": "#141414",
         "mobile_background_color": "#2b2b2b",

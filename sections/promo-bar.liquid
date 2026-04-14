@@ -6,19 +6,26 @@
     --promo-bar-text: {{ section.settings.text_color }};
   '
 >
-  <div class='promo-bar__left'>
-    {{- section.settings.consultant_text | escape -}}
-    <strong class='promo-bar__consultant-name'>{{ section.settings.consultant_name | escape }}</strong>
-  </div>
+  {% if section.settings.left_text_desktop != blank %}
+    <div class='promo-bar__left promo-bar__left--desktop'>
+      {{- section.settings.left_text_desktop -}}
+    </div>
+  {% endif %}
 
-  {% if section.settings.cta_text != blank %}
+  {% if section.settings.left_text_mobile != blank %}
+    <div class='promo-bar__left promo-bar__left--mobile'>
+      {{- section.settings.left_text_mobile -}}
+    </div>
+  {% endif %}
+
+  {% if section.settings.promo_text != blank %}
     <a
       class='promo-bar__right'
       {% if section.settings.cta_url != blank %}
         href='{{ section.settings.cta_url }}'
       {% endif %}
     >
-      {{- section.settings.cta_text | escape -}}
+      {{- section.settings.promo_text -}}
     </a>
   {% endif %}
 </div>
@@ -41,9 +48,12 @@
   padding-block: 5px;
 }
 
-.promo-bar__consultant-name {
-  font-weight: 700;
-  text-decoration: underline;
+.promo-bar__left--desktop {
+  display: block;
+}
+
+.promo-bar__left--mobile {
+  display: none;
 }
 
 .promo-bar__right {
@@ -75,6 +85,14 @@
     line-height: 16px;
   }
 
+  .promo-bar__left--desktop {
+    display: none;
+  }
+
+  .promo-bar__left--mobile {
+    display: block;
+  }
+
   .promo-bar__right {
     display: none;
   }
@@ -87,21 +105,21 @@
   "tag": "section",
   "settings": [
     {
-      "type": "text",
-      "id": "consultant_text",
-      "label": "t:settings.consultant_text",
-      "default": "Your Shop Consultant is "
+      "type": "inline_richtext",
+      "id": "left_text_desktop",
+      "label": "t:settings.left_text_desktop",
+      "default": "Your Shop Consultant is <strong>SHOP.COM</strong>"
     },
     {
-      "type": "text",
-      "id": "consultant_name",
-      "label": "t:settings.consultant_name",
-      "default": "SHOP.COM"
+      "type": "inline_richtext",
+      "id": "left_text_mobile",
+      "label": "t:settings.left_text_mobile",
+      "default": "Shop Consultant: <strong>SHOP.COM</strong>"
     },
     {
-      "type": "text",
-      "id": "cta_text",
-      "label": "t:settings.cta_text",
+      "type": "inline_richtext",
+      "id": "promo_text",
+      "label": "t:settings.promo_text",
       "default": "Start Your SHOP.COM Business"
     },
     {
