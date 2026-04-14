@@ -151,7 +151,10 @@
     "width": "Width",
     "width_is_automatically_optimized": "Width is automatically optimized for mobile.",
     "app_required_for_ratings": "An app is required for product ratings. [Learn more](https://help.shopify.com/manual/apps)",
-    "navigation": "Navigation"
+    "navigation": "Navigation",
+    "main_header": "Main header",
+    "sub_header": "Sub-header",
+    "cta": "Call to action"
   },
   "html_defaults": {
     "join_our_email_list": "<h2>Join our email list</h2>",
@@ -435,7 +438,8 @@
     "video_section": "Video",
     "view_all_button": "View all",
     "pills": "Pills",
-    "comparison_slider": "Comparison slider"
+    "comparison_slider": "Comparison slider",
+    "custom_header": "Custom header"
   },
   "options": {
     "above_carousel": "Above carousel",
@@ -818,6 +822,8 @@
     "collection_title_case": "Collection title case",
     "color": "Color",
     "color_scheme": "Color scheme",
+    "cta_text": "CTA text",
+    "cta_url": "CTA link",
     "colors": "Colors",
     "columns": "Columns",
     // Layout container block name for grouping other blocks
@@ -863,6 +869,7 @@
     "enable_filtering": "Filters",
     "enable_grid_density": "Grid layout control",
     "enable_sorting": "Sorting",
+    "enable_sticky": "Sticky header",
     "enable_sticky_add_to_cart": "Sticky add to cart bar",
     "enable_sticky_content": "Sticky content on desktop",
     "enable_video_looping": "Video looping",
@@ -964,6 +971,7 @@
     "media_position": "Media position",
     "media_type": "Media type",
     "media_width": "Media width",
+    "main_menu": "Main menu",
     "menu": "Menu",
     "minimum_height": "Minimum height",
     "mobile_background_color": "Mobile background",
@@ -1026,6 +1034,10 @@
     "product_title_case": "Product title case",
     "product_type": "Product type",
     "products": "Products",
+    "promo_text": "Promo text",
+    "promo_url": "Promo link",
+    "promo_cta_text": "Promo CTA text",
+    "promo_cta_url": "Promo CTA link",
     "products_per_page": "Products per page",
     "product_custom_property": {
       "heading": "Heading",
@@ -1065,6 +1077,7 @@
     "row": "Row",
     "scroll_speed": "Time to next announcement",
     "search": "Search",
+    "search_placeholder": "Search placeholder",
     "search_icon": "Search icon",
     // Setting for search bar placement in header
     "search_position": "Position",
@@ -1112,6 +1125,7 @@
     "statement": "Statement",
     "sticky_add_to_cart": "Sticky add to cart",
     "sticky_header": "Sticky header",
+    "sub_menu": "Sub-header menu",
     // Icon line thickness setting label
     "stroke": "Stroke",
     "style": "Style",
