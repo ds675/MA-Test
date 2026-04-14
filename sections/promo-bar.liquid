@@ -1,0 +1,162 @@
+<div
+  class='promo-bar'
+  style='
+    --promo-bar-bg: {{ section.settings.background_color }};
+    --promo-bar-bg-mobile: {{ section.settings.mobile_background_color }};
+    --promo-bar-text: {{ section.settings.text_color }};
+  '
+>
+  {% if section.settings.left_text_desktop != blank %}
+    <div class='promo-bar__left promo-bar__left--desktop'>
+      {{- section.settings.left_text_desktop -}}
+    </div>
+  {% endif %}
+
+  {% if section.settings.left_text_mobile != blank %}
+    <div class='promo-bar__left promo-bar__left--mobile'>
+      {{- section.settings.left_text_mobile -}}
+    </div>
+  {% endif %}
+
+  {% if section.settings.promo_text != blank %}
+    <a
+      class='promo-bar__right'
+      {% if section.settings.cta_url != blank %}
+        href='{{ section.settings.cta_url }}'
+      {% endif %}
+    >
+      {{- section.settings.promo_text -}}
+    </a>
+  {% endif %}
+</div>
+
+{% stylesheet %}
+.promo-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 35px;
+  padding-inline: 64px;
+  background-color: var(--promo-bar-bg, #141414);
+  color: var(--promo-bar-text, #ffffff);
+  font-family: var(--font-body--family);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.promo-bar__left {
+  padding-block: 5px;
+}
+
+.promo-bar__left--desktop {
+  display: block;
+}
+
+.promo-bar__left--mobile {
+  display: none;
+}
+
+.promo-bar__right {
+  font-size: 14px;
+  line-height: 14px;
+  text-decoration: underline;
+  color: var(--promo-bar-text, #ffffff);
+  padding-block: 1px;
+  padding-inline-start: 5px;
+}
+
+.promo-bar__right:hover {
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 749px) {
+  .promo-bar {
+    background-color: var(--promo-bar-bg-mobile, #2B2B2B);
+    padding: 8px 12px;
+    min-height: auto;
+    font-size: 12px;
+    line-height: 16px;
+    justify-content: center;
+  }
+
+  .promo-bar__left {
+    padding-block: 0;
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  .promo-bar__left--desktop {
+    display: none;
+  }
+
+  .promo-bar__left--mobile {
+    display: block;
+  }
+
+  .promo-bar__right {
+    display: none;
+  }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.promo_bar",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "left_text_desktop",
+      "label": "t:settings.left_text_desktop",
+      "default": "Your Shop Consultant is <strong>SHOP.COM</strong>"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "left_text_mobile",
+      "label": "t:settings.left_text_mobile",
+      "default": "Shop Consultant: <strong>SHOP.COM</strong>"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "promo_text",
+      "label": "t:settings.promo_text",
+      "default": "Start Your SHOP.COM Business"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "t:settings.cta_url"
+    },
+    {
+      "type": "header",
+      "content": "t:content.appearance"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "default": "#141414"
+    },
+    {
+      "type": "color",
+      "id": "mobile_background_color",
+      "label": "t:settings.mobile_background_color",
+      "default": "#2B2B2B"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "t:settings.text_color",
+      "default": "#FFFFFF"
+    }
+  ],
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "presets": [
+    {
+      "name": "t:names.promo_bar"
+    }
+  ]
+}
+{% endschema %}
