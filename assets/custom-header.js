@@ -18,6 +18,19 @@ class CustomHeaderComponent extends Component {
   connectedCallback() {
     super.connectedCallback();
     this.#debouncedSearch = debounce(this.#performSearch.bind(this), 300);
+    this.#initStickyHeader();
+  }
+
+  #initStickyHeader() {
+    if (!this.classList.contains('custom-header--sticky')) return;
+
+    const sectionWrapper = this.closest('[id^="shopify-section-"]');
+
+    if (sectionWrapper) {
+      sectionWrapper.style.position = 'sticky';
+      sectionWrapper.style.top = '0';
+      sectionWrapper.style.zIndex = 'var(--layer-header-menu, 12)';
+    }
   }
 
   disconnectedCallback() {
@@ -130,9 +143,12 @@ class CustomHeaderComponent extends Component {
 
     try {
       const searchRoot = this.dataset.searchUrl || `${window.Shopify?.routes?.root || '/'}search/suggest`;
-      const searchUrl = `${searchRoot}?q=${encodeURIComponent(query)}&resources[type]=product&resources[limit]=6`;
+      const url = new URL(searchRoot, window.location.origin);
+      url.searchParams.set('q', query);
+      url.searchParams.set('resources[type]', 'product');
+      url.searchParams.set('resources[limit]', '6');
 
-      const response = await fetch(searchUrl, {
+      const response = await fetch(url.toString(), {
         signal: this.#abortController.signal,
       });
 

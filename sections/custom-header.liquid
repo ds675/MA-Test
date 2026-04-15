@@ -2,7 +2,7 @@
 
 <custom-header-component
   id="custom-header"
-  class="custom-header{% if section.settings.enable_sticky %} custom-header--sticky{% endif %}"
+  class="custom-header color-{{ section.settings.color_scheme }}{% if section.settings.enable_sticky %} custom-header--sticky{% endif %}"
   data-section-id="{{ section.id }}"
   data-search-url="{{ routes.predictive_search_url }}"
 >
