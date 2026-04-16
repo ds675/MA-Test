@@ -49,6 +49,17 @@
       </div>
     </div>
 
+    {%- comment -%} Desktop navigation {%- endcomment -%}
+    {%- if section.settings.desktop_menu != blank -%}
+      <nav class="custom-header__desktop-nav" aria-label="{{ 'sections.custom_header.desktop_navigation' | t }}">
+        {%- for link in linklists[section.settings.desktop_menu].links -%}
+          <a href="{{ link.url }}" class="custom-header__desktop-nav-link">
+            {{- link.title | escape -}}
+          </a>
+        {%- endfor -%}
+      </nav>
+    {%- endif -%}
+
     {%- comment -%} Desktop search bar {%- endcomment -%}
     <div class="custom-header__search">
       <form class="custom-header__search-form" action="{{ routes.search_url }}" method="get" role="search">
@@ -324,6 +335,12 @@
       "id": "main_menu",
       "label": "t:settings.main_menu",
       "default": "main-menu"
+    },
+    {
+      "type": "link_list",
+      "id": "desktop_menu",
+      "label": "t:settings.desktop_menu",
+      "default": "header-desktop"
     },
     {
       "type": "text",

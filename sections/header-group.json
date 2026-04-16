@@ -58,6 +58,7 @@
       "type": "custom-header",
       "settings": {
         "main_menu": "main-menu",
+        "desktop_menu": "header-desktop",
         "sub_menu": "sub-menu",
         "search_placeholder": "Search products",
         "cta_text": "Take Quiz",
