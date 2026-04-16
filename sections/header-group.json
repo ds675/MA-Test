@@ -58,10 +58,9 @@
       "type": "custom-header",
       "settings": {
         "main_menu": "main-menu",
-        "desktop_menu": "header-desktop",
-        "sub_menu": "sub-menu",
-        "search_placeholder": "Search products",
         "cta_text": "Take Quiz",
+        "search_placeholder": "Search products",
+        "sub_menu": "sub-menu",
         "promo_text": "$6,073,506,282 awarded in cash! Learn More",
         "promo_cta_text": "Get Paid Daily.",
         "enable_sticky": true,
