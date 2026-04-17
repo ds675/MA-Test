@@ -23,46 +23,19 @@
         "text_color": "#ffffff"
       }
     },
-    "header_announcements_9jGBFp": {
-      "type": "header-announcements",
-      "blocks": {
-        "announcement_BxgCk9": {
-          "type": "_announcement",
-          "settings": {
-            "text": "Welcome to our store",
-            "link": "",
-            "font": "var(--font-subheading--family)",
-            "font_size": "0.75rem",
-            "weight": "",
-            "letter_spacing": "normal",
-            "case": "none"
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "announcement_BxgCk9"
-      ],
-      "disabled": true,
-      "name": "t:names.announcement_bar",
-      "settings": {
-        "speed": 5,
-        "section_width": "page-width",
-        "color_scheme": "scheme-1",
-        "divider_width": 1,
-        "padding-block-start": 15,
-        "padding-block-end": 15
-      }
-    },
     "header_section": {
       "type": "custom-header",
       "settings": {
-        "main_menu": "main-menu",
+        "main_menu": "header-desktop",
+        "desktop_menu": "",
         "cta_text": "Take Quiz",
+        "cta_url": "",
         "search_placeholder": "Search products",
         "sub_menu": "header-desktop",
         "promo_text": "$6,073,506,282 awarded in cash! Learn More",
+        "promo_url": "",
         "promo_cta_text": "Get Paid Daily.",
+        "promo_cta_url": "",
         "enable_sticky": true,
         "color_scheme": "scheme-1",
         "padding-block-start": 0,
@@ -72,7 +45,6 @@
   },
   "order": [
     "promo_bar",
-    "header_announcements_9jGBFp",
     "header_section"
   ]
 }
