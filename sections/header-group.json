@@ -26,8 +26,7 @@
     "header_section": {
       "type": "custom-header",
       "settings": {
-        "main_menu": "header-desktop",
-        "desktop_menu": "",
+        "desktop_menu": "header-desktop",
         "cta_text": "Take Quiz",
         "cta_url": "",
         "search_placeholder": "Search products",

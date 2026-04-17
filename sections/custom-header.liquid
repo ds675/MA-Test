@@ -108,8 +108,17 @@
         <a
           class="custom-header__cta-link"
           href="{{ section.settings.cta_url | default: '#' }}"
+          aria-label="{{ section.settings.cta_text | escape }}"
         >
-          {{- section.settings.cta_text | escape -}}
+          <span class="custom-header__cta-icon" aria-hidden="true">
+            <img
+              src="{{ 'icon-help-outline-24px-1.svg' | asset_url }}"
+              alt=""
+              width="20"
+              height="20"
+            >
+          </span>
+          <span class="custom-header__cta-text">{{ section.settings.cta_text | escape }}</span>
         </a>
       {%- endif -%}
 
@@ -295,8 +304,8 @@
     </div>
 
     <nav class="custom-header__drawer-nav" aria-label="{{ 'sections.custom_header.menu' | t }}">
-      {%- if section.settings.main_menu != blank -%}
-        {%- for link in linklists[section.settings.main_menu].links -%}
+      {%- if section.settings.desktop_menu != blank -%}
+        {%- for link in linklists[section.settings.desktop_menu].links -%}
           <a href="{{ link.url }}" class="custom-header__drawer-link">
             {{- link.title | escape -}}
           </a>
@@ -332,14 +341,10 @@
     },
     {
       "type": "link_list",
-      "id": "main_menu",
-      "label": "t:settings.main_menu",
-      "default": "main-menu"
-    },
-    {
-      "type": "link_list",
       "id": "desktop_menu",
-      "label": "t:settings.desktop_menu"
+      "label": "t:settings.desktop_menu",
+      "info": "Used for the desktop nav bar and the mobile slide-out drawer.",
+      "default": "main-menu"
     },
     {
       "type": "text",
@@ -395,7 +400,7 @@
     },
     {
       "type": "header",
-      "content": "t:content.cta"
+      "content": "t:content.appearance"
     },
     {
       "type": "checkbox",
@@ -412,7 +417,7 @@
     {
       "type": "range",
       "id": "padding-block-start",
-      "label": "t:settings.padding",
+      "label": "t:settings.padding_top",
       "min": 0,
       "max": 100,
       "step": 1,
@@ -422,7 +427,7 @@
     {
       "type": "range",
       "id": "padding-block-end",
-      "label": "t:settings.padding",
+      "label": "t:settings.padding_bottom",
       "min": 0,
       "max": 100,
       "step": 1,
