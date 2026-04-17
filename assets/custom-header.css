@@ -4,16 +4,17 @@
 
 .custom-header {
   display: block;
-  z-index: var(--layer-header-menu, 12);
+  z-index: var(--layer-sticky, 100);
   background-color: rgb(var(--color-background));
 }
 
-/* Apply sticky to the Shopify section wrapper so it has room to stick within
-   the page scroll container, not within its own content box. */
-.custom-header-section:has(.custom-header--sticky) {
+/* Sticky must target #header-group (direct child of body) — sticking an inner
+   element keeps it trapped inside header-group's own height and produces no
+   visible effect while scrolling the page. */
+body:has(.custom-header--sticky) #header-group {
   position: sticky;
   top: 0;
-  z-index: var(--layer-header-menu, 12);
+  z-index: var(--layer-sticky, 100);
 }
 
 /* --------------------------------------------------------------------------
@@ -227,7 +228,7 @@
 .custom-header__cta-link {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
   border: 1px solid #141414;
   border-radius: 20px;
   padding: 8px 16px;
@@ -244,20 +245,6 @@
 
 .custom-header__cta-link:hover {
   background-color: #f5f5f5;
-}
-
-.custom-header__cta-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-}
-
-.custom-header__cta-icon img {
-  width: 20px;
-  height: 20px;
 }
 
 .custom-header__actions {
@@ -508,6 +495,25 @@
   height: 20px;
 }
 
+.custom-header__mobile-cta {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.custom-header__mobile-cta img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 .custom-header__mobile-search-close {
   display: flex;
   align-items: center;
@@ -690,13 +696,6 @@
   }
 
   .custom-header__cta-link {
-    padding: 6px;
-    gap: 0;
-    border-radius: 50%;
-    border: none;
-  }
-
-  .custom-header__cta-text {
     display: none;
   }
 
@@ -734,6 +733,10 @@
 
   .custom-header__mobile-search-close {
     display: none !important;
+  }
+
+  .custom-header__mobile-cta {
+    display: flex;
   }
 }
 

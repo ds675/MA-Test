@@ -108,17 +108,8 @@
         <a
           class="custom-header__cta-link"
           href="{{ section.settings.cta_url | default: '#' }}"
-          aria-label="{{ section.settings.cta_text | escape }}"
         >
-          <span class="custom-header__cta-icon" aria-hidden="true">
-            <img
-              src="{{ 'icon-help-outline-24px-1.svg' | asset_url }}"
-              alt=""
-              width="20"
-              height="20"
-            >
-          </span>
-          <span class="custom-header__cta-text">{{ section.settings.cta_text | escape }}</span>
+          {{- section.settings.cta_text | escape -}}
         </a>
       {%- endif -%}
 
@@ -203,6 +194,23 @@
         >
       </button>
     </form>
+
+    {%- if section.settings.mobile_cta_image != blank -%}
+      <a
+        class="custom-header__mobile-cta"
+        href="{{ section.settings.mobile_cta_url | default: '#' }}"
+        aria-label="{{ section.settings.mobile_cta_label | escape }}"
+      >
+        <img
+          src="{{ section.settings.mobile_cta_image | image_url: width: 80 }}"
+          alt="{{ section.settings.mobile_cta_label | escape }}"
+          width="40"
+          height="40"
+          loading="lazy"
+        >
+      </a>
+    {%- endif -%}
+
     <button
       class="custom-header__mobile-search-close"
       type="button"
@@ -366,6 +374,30 @@
       "id": "search_placeholder",
       "label": "t:settings.search_placeholder",
       "default": "Search products"
+    },
+    {
+      "type": "header",
+      "content": "Mobile icon CTA"
+    },
+    {
+      "type": "paragraph",
+      "content": "Shown only on mobile, to the right of the search bar."
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_cta_image",
+      "label": "Icon image"
+    },
+    {
+      "type": "url",
+      "id": "mobile_cta_url",
+      "label": "Link"
+    },
+    {
+      "type": "text",
+      "id": "mobile_cta_label",
+      "label": "Accessibility label",
+      "default": "Account"
     },
     {
       "type": "header",
