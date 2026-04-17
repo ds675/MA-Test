@@ -1,0 +1,4 @@
+## Recent
+[chat] position:sticky on inner element inside a Shopify section with `tag:"header"` won't stick — the section wrapper is the same height as the content so there's no room within the containing block. Apply sticky to the section wrapper class via `.custom-header-section:has(.custom-header--sticky) { position: sticky; top: 0; }`.
+[chat] Custom header `custom-header.liquid` uses three link_list settings: `desktop_menu` drives the top desktop nav + mobile drawer, `sub_menu` drives the subheader categories. Do not add `main_menu` back — it used to duplicate `desktop_menu` and was removed for clarity.
+[chat] Range settings using `"t:settings.padding"` on two adjacent range inputs render as duplicate "Padding" labels in the customizer. Use `"t:settings.padding_top"` and `"t:settings.padding_bottom"` (both already defined in `locales/en.default.schema.json`).
