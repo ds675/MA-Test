@@ -340,6 +340,19 @@
     "blog_post_date": "Date",
     "blog_post_description": "An excerpt of your blog post's content"
   },
+  "sections": {
+    "custom_header": {
+      "search_placeholder": "Search products",
+      "sign_in": "Sign in",
+      "cart": "Cart",
+      "menu": "Menu",
+      "close": "Close",
+      "close_search": "Close search",
+      "open_search": "Search",
+      "departments": "Departments",
+      "desktop_navigation": "Desktop navigation"
+    }
+  },
   "products": {
     "product": {
       "add_to_cart": "Add to cart",
