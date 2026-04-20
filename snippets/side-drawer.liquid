@@ -49,7 +49,13 @@
       </button>
 
       <span ref="headerTitle" class="side-drawer__header-title">
-        {{- 'sections.side_drawer.shop' | t -}}
+        <img
+          src="{{ 'shop-logo.svg' | asset_url }}"
+          alt="{{ shop.name }}"
+          width="120"
+          height="16"
+          loading="eager"
+        >
       </span>
 
       <button
@@ -348,29 +354,37 @@
               {%- endif -%}
             {%- endfor -%}
 
-            {%- comment -%} Promo tiles from menu_panel metaobject {%- endcomment -%}
+            {%- comment -%} Promo tiles from menu_panel metaobject (sorted by display_order) {%- endcomment -%}
             {%- if shop.metaobjects.menu_panel != blank -%}
-              {%- assign promo_tiles_rendered = false -%}
-              {%- for panel in shop.metaobjects.menu_panel.values -%}
-                {%- if panel.menu_handle == link.handle -%}
-                  {%- unless promo_tiles_rendered -%}
-                    <div class="side-drawer__promo-tiles">
-                    {%- assign promo_tiles_rendered = true -%}
-                  {%- endunless -%}
-                  <a href="{{ panel.link.value }}" class="side-drawer__promo-tile">
-                    {%- if panel.image.value != blank -%}
-                      <img
-                        src="{{ panel.image.value | image_url: width: 400 }}"
-                        alt="{{ panel.title | escape }}"
-                        width="400"
-                        height="200"
-                        loading="lazy"
-                      >
-                    {%- endif -%}
-                  </a>
-                {%- endif -%}
-              {%- endfor -%}
-              {%- if promo_tiles_rendered -%}
+              {%- assign l2_panels = shop.metaobjects.menu_panel.values | where: 'menu_handle', link.handle | sort: 'display_order' -%}
+              {%- if l2_panels.size > 0 -%}
+                <div class="side-drawer__promo-tiles">
+                  {%- for panel in l2_panels -%}
+                    <a href="{{ panel.cta_link.value | default: '#' }}" class="side-drawer__promo-tile">
+                      {%- if panel.promo_image.value != blank -%}
+                        <img
+                          src="{{ panel.promo_image.value | image_url: width: 400 }}"
+                          alt="{{ panel.heading | default: panel.title | escape }}"
+                          width="400"
+                          height="200"
+                          loading="lazy"
+                        >
+                      {%- endif -%}
+                      {%- if panel.heading != blank or panel.subheading != blank or panel.cta_label != blank -%}
+                        <div class="side-drawer__promo-tile-content">
+                          {%- if panel.heading != blank -%}
+                            <span class="side-drawer__promo-tile-heading">{{ panel.heading | escape }}</span>
+                          {%- endif -%}
+                          {%- if panel.subheading != blank -%}
+                            <span class="side-drawer__promo-tile-subheading">{{ panel.subheading | escape }}</span>
+                          {%- endif -%}
+                          {%- if panel.cta_label != blank -%}
+                            <span class="side-drawer__promo-tile-cta">{{ panel.cta_label | escape }}</span>
+                          {%- endif -%}
+                        </div>
+                      {%- endif -%}
+                    </a>
+                  {%- endfor -%}
                 </div>
               {%- endif -%}
             {%- endif -%}
@@ -410,29 +424,37 @@
                   {%- endif -%}
                 {%- endfor -%}
 
-                {%- comment -%} Promo tiles from menu_panel metaobject {%- endcomment -%}
+                {%- comment -%} Promo tiles from menu_panel metaobject (sorted by display_order) {%- endcomment -%}
                 {%- if shop.metaobjects.menu_panel != blank -%}
-                  {%- assign l3_promo_rendered = false -%}
-                  {%- for panel in shop.metaobjects.menu_panel.values -%}
-                    {%- if panel.menu_handle == child.handle -%}
-                      {%- unless l3_promo_rendered -%}
-                        <div class="side-drawer__promo-tiles">
-                        {%- assign l3_promo_rendered = true -%}
-                      {%- endunless -%}
-                      <a href="{{ panel.link.value }}" class="side-drawer__promo-tile">
-                        {%- if panel.image.value != blank -%}
-                          <img
-                            src="{{ panel.image.value | image_url: width: 400 }}"
-                            alt="{{ panel.title | escape }}"
-                            width="400"
-                            height="200"
-                            loading="lazy"
-                          >
-                        {%- endif -%}
-                      </a>
-                    {%- endif -%}
-                  {%- endfor -%}
-                  {%- if l3_promo_rendered -%}
+                  {%- assign l3_panels = shop.metaobjects.menu_panel.values | where: 'menu_handle', child.handle | sort: 'display_order' -%}
+                  {%- if l3_panels.size > 0 -%}
+                    <div class="side-drawer__promo-tiles">
+                      {%- for panel in l3_panels -%}
+                        <a href="{{ panel.cta_link.value | default: '#' }}" class="side-drawer__promo-tile">
+                          {%- if panel.promo_image.value != blank -%}
+                            <img
+                              src="{{ panel.promo_image.value | image_url: width: 400 }}"
+                              alt="{{ panel.heading | default: panel.title | escape }}"
+                              width="400"
+                              height="200"
+                              loading="lazy"
+                            >
+                          {%- endif -%}
+                          {%- if panel.heading != blank or panel.subheading != blank or panel.cta_label != blank -%}
+                            <div class="side-drawer__promo-tile-content">
+                              {%- if panel.heading != blank -%}
+                                <span class="side-drawer__promo-tile-heading">{{ panel.heading | escape }}</span>
+                              {%- endif -%}
+                              {%- if panel.subheading != blank -%}
+                                <span class="side-drawer__promo-tile-subheading">{{ panel.subheading | escape }}</span>
+                              {%- endif -%}
+                              {%- if panel.cta_label != blank -%}
+                                <span class="side-drawer__promo-tile-cta">{{ panel.cta_label | escape }}</span>
+                              {%- endif -%}
+                            </div>
+                          {%- endif -%}
+                        </a>
+                      {%- endfor -%}
                     </div>
                   {%- endif -%}
                 {%- endif -%}
@@ -444,14 +466,29 @@
 
       {%- comment -%} ========== BRANDS PANEL ========== {%- endcomment -%}
       {%- if brands_handle != blank and shop.metaobjects.brand != blank -%}
-        <div class="side-drawer__panel" data-panel-id="l2-{{ brands_handle }}" data-panel-title="{{ brands_handle | capitalize }}">
-          <a href="/collections/{{ brands_handle }}" class="side-drawer__brands-all-link">
+        <div class="side-drawer__panel" data-panel-id="l2-{{ brands_handle }}" data-panel-title="{{ brands_handle | replace: '-', ' ' | capitalize }}">
+          <a href="{{ routes.collections_url }}/{{ brands_handle }}" class="side-drawer__brands-all-link">
             {{ 'sections.side_drawer.shop_all_brands' | t }}
           </a>
 
-          {%- comment -%} Group brands by category {%- endcomment -%}
+          {%- comment -%} Sort brands: featured first, then by display_order ascending {%- endcomment -%}
+          {%- assign sorted_brands = shop.metaobjects.brand.values | sort: 'display_order' -%}
+          {%- assign featured_brands = sorted_brands | where: 'featured', true -%}
+          {%- assign non_featured_brands = sorted_brands | where: 'featured', false -%}
+
+          {%- comment -%} Group brands by category (featured-first ordering preserved) {%- endcomment -%}
           {%- assign brand_categories = '' -%}
-          {%- for brand in shop.metaobjects.brand.values -%}
+          {%- for brand in featured_brands -%}
+            {%- assign cat = brand.category | default: 'Other' -%}
+            {%- unless brand_categories contains cat -%}
+              {%- if brand_categories != '' -%}
+                {%- assign brand_categories = brand_categories | append: '|||' | append: cat -%}
+              {%- else -%}
+                {%- assign brand_categories = cat -%}
+              {%- endif -%}
+            {%- endunless -%}
+          {%- endfor -%}
+          {%- for brand in non_featured_brands -%}
             {%- assign cat = brand.category | default: 'Other' -%}
             {%- unless brand_categories contains cat -%}
               {%- if brand_categories != '' -%}
@@ -469,7 +506,7 @@
               <button
                 class="side-drawer__accordion-trigger"
                 type="button"
-                aria-expanded="false"
+                aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}"
                 aria-controls="{{ brand_acc_id }}"
                 on:click="/handleAccordionToggle"
               >
@@ -478,9 +515,28 @@
                   <path d="M6 9L12 15L18 9" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
-              <div id="{{ brand_acc_id }}" class="side-drawer__accordion-content">
+              <div id="{{ brand_acc_id }}" class="side-drawer__accordion-content"{% if forloop.first %} data-expanded{% endif %}>
                 <div class="side-drawer__brand-grid">
-                  {%- for brand in shop.metaobjects.brand.values -%}
+                  {%- for brand in featured_brands -%}
+                    {%- assign brand_cat = brand.category | default: 'Other' -%}
+                    {%- if brand_cat == category -%}
+                      <a href="{{ brand.url.value | default: '#' }}" class="side-drawer__brand-item">
+                        <span class="side-drawer__brand-logo">
+                          {%- if brand.logo != blank -%}
+                            <img
+                              src="{{ brand.logo.value | image_url: width: 144 }}"
+                              alt="{{ brand.title | escape }}"
+                              width="72"
+                              height="72"
+                              loading="lazy"
+                            >
+                          {%- endif -%}
+                        </span>
+                        <span class="side-drawer__brand-name">{{ brand.title | escape }}</span>
+                      </a>
+                    {%- endif -%}
+                  {%- endfor -%}
+                  {%- for brand in non_featured_brands -%}
                     {%- assign brand_cat = brand.category | default: 'Other' -%}
                     {%- if brand_cat == category -%}
                       <a href="{{ brand.url.value | default: '#' }}" class="side-drawer__brand-item">
