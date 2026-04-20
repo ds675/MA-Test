@@ -1,0 +1,282 @@
+{% doc %}
+  Drawer Side Menu
+
+  Renders the multi-panel sliding side drawer for the custom header.
+  Contains: main panel (Shop links, Brands button, Account links, Feature links),
+  shop sub-panels (child links + featured image from Menu Panel metaobjects),
+  and a brands panel (from Brand metaobjects).
+
+  @param {Object} section - The section object (required)
+
+  @example
+    {% render 'drawer-side-menu', section: section %}
+{% enddoc %}
+
+{%- comment -%} ===== DRAWER OVERLAY ===== {%- endcomment -%}
+<div
+  ref="drawerOverlay"
+  class="custom-header__drawer-overlay"
+  on:click="/handleCloseDrawer"
+  aria-hidden="true"
+></div>
+
+{%- comment -%} ===== DRAWER ===== {%- endcomment -%}
+<div
+  ref="drawer"
+  class="custom-header__drawer"
+  role="dialog"
+  aria-modal="true"
+  aria-label="{{ 'sections.custom_header.menu' | t }}"
+  on:keydown="/handleDrawerKeydown"
+>
+  <div class="custom-header__drawer-header">
+    <span class="custom-header__drawer-title">{{ 'sections.custom_header.menu' | t }}</span>
+    <button
+      ref="drawerClose"
+      class="custom-header__drawer-close"
+      type="button"
+      aria-label="{{ 'sections.custom_header.close' | t }}"
+      on:click="/handleCloseDrawer"
+    >
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M6 6L18 18M6 18L18 6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <div ref="drawerBody" class="custom-header__drawer-body">
+    {%- comment -%} ===== MAIN PANEL (Level 0) ===== {%- endcomment -%}
+    <div
+      ref="panelMain"
+      class="custom-header__drawer-panel custom-header__drawer-panel--active"
+      data-panel-id="main"
+    >
+      {%- comment -%} Shop section {%- endcomment -%}
+      {%- if section.settings.side_menu != blank -%}
+        <div class="custom-header__drawer-section">
+          <span class="custom-header__drawer-section-title">{{ 'sections.custom_header.shop' | t }}</span>
+          <nav aria-label="{{ 'sections.custom_header.shop' | t }}">
+            {%- for link in linklists[section.settings.side_menu].links -%}
+              {%- if link.links.size > 0 -%}
+                <button
+                  class="custom-header__drawer-menu-item"
+                  type="button"
+                  data-panel-target="shop-{{ forloop.index }}"
+                  on:click="/handleOpenPanel"
+                  aria-expanded="false"
+                >
+                  <span class="custom-header__drawer-menu-item-text">{{ link.title | escape }}</span>
+                  <svg class="custom-header__drawer-chevron" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M9 6L15 12L9 18" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+              {%- else -%}
+                <a href="{{ link.url }}" class="custom-header__drawer-link">
+                  {{- link.title | escape -}}
+                </a>
+              {%- endif -%}
+            {%- endfor -%}
+          </nav>
+        </div>
+        <div class="custom-header__drawer-divider"></div>
+      {%- endif -%}
+
+      {%- comment -%} Brands button {%- endcomment -%}
+      <div class="custom-header__drawer-section">
+        <button
+          class="custom-header__drawer-menu-item"
+          type="button"
+          data-panel-target="brands"
+          on:click="/handleOpenPanel"
+          aria-expanded="false"
+        >
+          <span class="custom-header__drawer-menu-item-text">{{ 'sections.custom_header.brands' | t }}</span>
+          <svg class="custom-header__drawer-chevron" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M9 6L15 12L9 18" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+      <div class="custom-header__drawer-divider"></div>
+
+      {%- comment -%} Account section {%- endcomment -%}
+      {%- assign account_blocks_exist = false -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'account_link' -%}
+          {%- assign account_blocks_exist = true -%}
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- if account_blocks_exist -%}
+        <div class="custom-header__drawer-section">
+          <span class="custom-header__drawer-section-title">{{ 'sections.custom_header.account' | t }}</span>
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'account_link' -%}
+              <a
+                href="{{ block.settings.url | default: '#' }}"
+                class="custom-header__drawer-icon-link"
+                {{ block.shopify_attributes }}
+              >
+                {%- if block.settings.icon != blank -%}
+                  <img
+                    class="custom-header__drawer-icon-link-img"
+                    src="{{ block.settings.icon | image_url: width: 48 }}"
+                    alt=""
+                    width="24"
+                    height="24"
+                    loading="lazy"
+                    aria-hidden="true"
+                  >
+                {%- endif -%}
+                <span class="custom-header__drawer-icon-link-text">{{ block.settings.title | escape }}</span>
+              </a>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+        <div class="custom-header__drawer-divider"></div>
+      {%- endif -%}
+
+      {%- comment -%} Features section {%- endcomment -%}
+      {%- assign feature_blocks_exist = false -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'feature_link' -%}
+          {%- assign feature_blocks_exist = true -%}
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- if feature_blocks_exist -%}
+        <div class="custom-header__drawer-section">
+          <span class="custom-header__drawer-section-title">{{ 'sections.custom_header.features' | t }}</span>
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'feature_link' -%}
+              <a
+                href="{{ block.settings.url | default: '#' }}"
+                class="custom-header__drawer-icon-link"
+                {{ block.shopify_attributes }}
+              >
+                {%- if block.settings.icon != blank -%}
+                  <img
+                    class="custom-header__drawer-icon-link-img"
+                    src="{{ block.settings.icon | image_url: width: 48 }}"
+                    alt=""
+                    width="24"
+                    height="24"
+                    loading="lazy"
+                    aria-hidden="true"
+                  >
+                {%- endif -%}
+                <span class="custom-header__drawer-icon-link-text">{{ block.settings.title | escape }}</span>
+              </a>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} ===== SHOP SUB-PANELS (Level 1) ===== {%- endcomment -%}
+    {%- if section.settings.side_menu != blank -%}
+      {%- for link in linklists[section.settings.side_menu].links -%}
+        {%- if link.links.size > 0 -%}
+          <div
+            class="custom-header__drawer-panel"
+            data-panel-id="shop-{{ forloop.index }}"
+          >
+            <button
+              class="custom-header__drawer-back"
+              type="button"
+              on:click="/handleBackPanel"
+            >
+              <svg class="custom-header__drawer-back-arrow" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M15 18L9 12L15 6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>{{ 'sections.custom_header.back' | t }}</span>
+            </button>
+
+            <span class="custom-header__drawer-panel-title">{{ link.title | escape }}</span>
+
+            {%- comment -%} Featured image from Menu Panel metaobject {%- endcomment -%}
+            {%- assign panel_image = blank -%}
+            {%- assign panel_title = blank -%}
+            {%- if shop.metaobjects['menu_panel'] != blank -%}
+              {%- for entry in shop.metaobjects['menu_panel'].values -%}
+                {%- if entry.menu_item_title.value == link.title or entry.title.value == link.title -%}
+                  {%- assign panel_image = entry.image.value -%}
+                  {%- assign panel_title = entry.title.value | default: link.title -%}
+                  {%- break -%}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+
+            {%- if panel_image != blank -%}
+              <div class="custom-header__drawer-featured">
+                <img
+                  src="{{ panel_image | image_url: width: 600 }}"
+                  alt="{{ panel_title | escape }}"
+                  width="300"
+                  height="200"
+                  loading="lazy"
+                  class="custom-header__drawer-featured-img"
+                >
+                {%- if panel_title != blank -%}
+                  <span class="custom-header__drawer-featured-title">{{ panel_title | escape }}</span>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+
+            <nav class="custom-header__drawer-subpanel-nav" aria-label="{{ link.title | escape }}">
+              {%- for child_link in link.links -%}
+                <a href="{{ child_link.url }}" class="custom-header__drawer-link">
+                  {{- child_link.title | escape -}}
+                </a>
+              {%- endfor -%}
+            </nav>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+
+    {%- comment -%} ===== BRANDS PANEL ===== {%- endcomment -%}
+    <div
+      class="custom-header__drawer-panel"
+      data-panel-id="brands"
+    >
+      <button
+        class="custom-header__drawer-back"
+        type="button"
+        on:click="/handleBackPanel"
+      >
+        <svg class="custom-header__drawer-back-arrow" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M15 18L9 12L15 6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>{{ 'sections.custom_header.back' | t }}</span>
+      </button>
+
+      <span class="custom-header__drawer-panel-title">{{ 'sections.custom_header.brands' | t }}</span>
+
+      {%- if shop.metaobjects['brand'] != blank -%}
+        <div class="custom-header__drawer-brands-grid">
+          {%- for entry in shop.metaobjects['brand'].values -%}
+            <div class="custom-header__drawer-brand-item">
+              {%- if entry.logo.value != blank -%}
+                <img
+                  src="{{ entry.logo.value | image_url: width: 200 }}"
+                  alt="{{ entry.name.value | default: entry.title.value | escape }}"
+                  width="80"
+                  height="80"
+                  loading="lazy"
+                  class="custom-header__drawer-brand-logo"
+                >
+              {%- endif -%}
+              <span class="custom-header__drawer-brand-name">
+                {{- entry.name.value | default: entry.title.value | escape -}}
+              </span>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- else -%}
+        <p class="custom-header__drawer-empty">{{ 'sections.custom_header.brands' | t }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</div>

@@ -581,13 +581,13 @@ body:has(.custom-header--sticky) #header-group {
   top: 0;
   left: 0;
   bottom: 0;
-  width: 320px;
+  width: 380px;
   max-width: 85vw;
   background-color: #FFFFFF;
   z-index: calc(var(--layer-header-menu, 12) + 4);
   transform: translateX(-100%);
   transition: transform 0.3s ease;
-  overflow-y: auto;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
 }
@@ -662,6 +662,237 @@ body:has(.custom-header--sticky) #header-group {
 
 .custom-header__drawer-link:hover {
   color: #767676;
+}
+
+/* --------------------------------------------------------------------------
+   Drawer Multi-Panel
+   -------------------------------------------------------------------------- */
+
+.custom-header__drawer-body {
+  flex: 1;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.custom-header__drawer-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+  padding: 16px;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  background-color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-header__drawer-panel--active {
+  position: relative;
+  transform: translateX(0);
+}
+
+.custom-header__drawer-panel--exit-left {
+  position: absolute;
+  transform: translateX(-100%);
+}
+
+.custom-header__drawer-panel--enter-right {
+  position: absolute;
+  transform: translateX(100%);
+}
+
+.custom-header__drawer-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-header__drawer-section-title {
+  font-family: var(--font-heading--family), sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  color: #767676;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0 0 8px;
+}
+
+.custom-header__drawer-divider {
+  border: none;
+  border-bottom: 1px solid #f0f0f0;
+  margin: 8px 0;
+}
+
+.custom-header__drawer-menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 0;
+  font-family: var(--font-body--family), sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #141414;
+  text-decoration: none;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  text-align: start;
+}
+
+.custom-header__drawer-menu-item:hover {
+  color: #767676;
+}
+
+.custom-header__drawer-menu-item-text {
+  flex: 1;
+}
+
+.custom-header__drawer-chevron {
+  width: 20px;
+  height: 20px;
+  stroke: #767676;
+  stroke-width: 2;
+  fill: none;
+  flex-shrink: 0;
+}
+
+.custom-header__drawer-back {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0 16px;
+  font-family: var(--font-body--family), sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #767676;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: start;
+}
+
+.custom-header__drawer-back:hover {
+  color: #141414;
+}
+
+.custom-header__drawer-back-arrow {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+  flex-shrink: 0;
+}
+
+.custom-header__drawer-panel-title {
+  font-family: var(--font-heading--family), sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #141414;
+  padding-bottom: 16px;
+}
+
+.custom-header__drawer-featured {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.custom-header__drawer-featured-img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+  aspect-ratio: 3 / 2;
+}
+
+.custom-header__drawer-featured-title {
+  font-family: var(--font-body--family), sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: #141414;
+}
+
+.custom-header__drawer-subpanel-nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-header__drawer-icon-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  text-decoration: none;
+  color: #141414;
+  font-family: var(--font-body--family), sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.custom-header__drawer-icon-link:hover {
+  color: #767676;
+}
+
+.custom-header__drawer-icon-link-img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.custom-header__drawer-icon-link-text {
+  flex: 1;
+}
+
+.custom-header__drawer-brands-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.custom-header__drawer-brand-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.custom-header__drawer-brand-logo {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+.custom-header__drawer-brand-name {
+  font-family: var(--font-body--family), sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #141414;
+}
+
+.custom-header__drawer-empty {
+  font-family: var(--font-body--family), sans-serif;
+  font-size: 14px;
+  color: #767676;
+  padding: 16px 0;
 }
 
 /* --------------------------------------------------------------------------

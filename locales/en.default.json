@@ -350,7 +350,14 @@
       "close_search": "Close search",
       "open_search": "Search",
       "departments": "Departments",
-      "desktop_navigation": "Desktop navigation"
+      "desktop_navigation": "Desktop navigation",
+      "shop": "Shop",
+      "brands": "Brands",
+      "account": "Account",
+      "features": "Features",
+      "back": "Back",
+      "view_all_brands": "View All Brands",
+      "featured": "Featured"
     }
   },
   "products": {
