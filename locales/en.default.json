@@ -351,6 +351,26 @@
       "open_search": "Search",
       "departments": "Departments",
       "desktop_navigation": "Desktop navigation"
+    },
+    "side_drawer": {
+      "shop": "Shop",
+      "account": "Account",
+      "features": "Features",
+      "sign_in": "Sign In",
+      "my_account": "My Account",
+      "track_orders": "Track Orders",
+      "reorder_items": "Reorder Items",
+      "help": "Help",
+      "home_shopping_list": "Home Shopping List",
+      "list_manager": "List Manager",
+      "egifts": "eGifts",
+      "price_alerts": "Price Alerts",
+      "shopbuddy": "ShopBuddy",
+      "deals": "Deals",
+      "nutri_physical": "Nutri Physical",
+      "back": "Back",
+      "close": "Close",
+      "shop_all_brands": "Shop All Brands"
     }
   },
   "products": {

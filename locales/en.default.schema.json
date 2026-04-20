@@ -154,7 +154,10 @@
     "navigation": "Navigation",
     "main_header": "Main header",
     "sub_header": "Sub-header",
-    "cta": "Call to action"
+    "cta": "Call to action",
+    "side_drawer": "Side drawer",
+    "account_links": "Account links",
+    "features_links": "Features links"
   },
   "html_defaults": {
     "join_our_email_list": "<h2>Join our email list</h2>",
@@ -1196,7 +1199,24 @@
     "cs_slider_inner_color": "Slider inner color",
     "text_on_images": "Text on images",
     "x_position": "Horizontal position",
-    "y_position": "Vertical position"
+    "y_position": "Vertical position",
+    "drawer_menu": "Drawer menu",
+    "brands_handle": "Brands handle",
+    "track_orders_url": "Track orders URL",
+    "reorder_items_url": "Reorder items URL",
+    "help_url": "Help URL",
+    "home_shopping_list_url": "Home shopping list URL",
+    "list_manager_url": "List manager URL",
+    "egifts_url": "eGifts URL",
+    "price_alerts_url": "Price alerts URL",
+    "shopbuddy_url": "ShopBuddy URL",
+    "deals_url": "Deals URL",
+    "nutri_physical_url": "Nutri Physical URL",
+    "social_facebook": "Facebook URL",
+    "social_x": "X (Twitter) URL",
+    "social_instagram": "Instagram URL",
+    "social_tiktok": "TikTok URL",
+    "social_youtube": "YouTube URL"
   },
   "text_defaults": {
     "accordion_heading": "Accordion heading",

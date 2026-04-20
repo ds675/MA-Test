@@ -67,37 +67,7 @@ class CustomHeaderComponent extends Component {
   /* ---- Drawer ---- */
 
   handleOpenDrawer() {
-    if (this.refs.drawer) {
-      this.refs.drawer.setAttribute('data-active', '');
-    }
-
-    if (this.refs.drawerOverlay) {
-      this.refs.drawerOverlay.setAttribute('data-active', '');
-    }
-
-    document.body.style.overflow = 'hidden';
-
-    if (this.refs.drawerClose) {
-      this.refs.drawerClose.focus();
-    }
-  }
-
-  handleCloseDrawer() {
-    if (this.refs.drawer) {
-      this.refs.drawer.removeAttribute('data-active');
-    }
-
-    if (this.refs.drawerOverlay) {
-      this.refs.drawerOverlay.removeAttribute('data-active');
-    }
-
-    document.body.style.overflow = '';
-  }
-
-  handleDrawerKeydown(event) {
-    if (event.key === 'Escape') {
-      this.handleCloseDrawer();
-    }
+    document.dispatchEvent(new CustomEvent('side-drawer:open'));
   }
 
   /* ---- Desktop search ---- */

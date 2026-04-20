@@ -1,4 +1,5 @@
 {{ 'custom-header.css' | asset_url | stylesheet_tag }}
+{{ 'side-drawer.css' | asset_url | stylesheet_tag }}
 
 <custom-header-component
   id="custom-header"
@@ -280,59 +281,12 @@
     </div>
   </div>
 
-  {%- comment -%} ===== DRAWER ===== {%- endcomment -%}
-  <div
-    ref="drawerOverlay"
-    class="custom-header__drawer-overlay"
-    on:click="/handleCloseDrawer"
-    aria-hidden="true"
-  ></div>
-
-  <div
-    ref="drawer"
-    class="custom-header__drawer"
-    role="dialog"
-    aria-modal="true"
-    aria-label="{{ 'sections.custom_header.menu' | t }}"
-    on:keydown="/handleDrawerKeydown"
-  >
-    <div class="custom-header__drawer-header">
-      <span class="custom-header__drawer-title">{{ 'sections.custom_header.menu' | t }}</span>
-      <button
-        ref="drawerClose"
-        class="custom-header__drawer-close"
-        type="button"
-        aria-label="{{ 'sections.custom_header.close' | t }}"
-        on:click="/handleCloseDrawer"
-      >
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M6 6L18 18M6 18L18 6" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-    </div>
-
-    <nav class="custom-header__drawer-nav" aria-label="{{ 'sections.custom_header.menu' | t }}">
-      {%- if section.settings.desktop_menu != blank -%}
-        {%- for link in linklists[section.settings.desktop_menu].links -%}
-          <a href="{{ link.url }}" class="custom-header__drawer-link">
-            {{- link.title | escape -}}
-          </a>
-        {%- endfor -%}
-      {%- endif -%}
-
-      {%- if section.settings.sub_menu != blank -%}
-        <span class="custom-header__drawer-nav-group-title">{{ 'sections.custom_header.departments' | t }}</span>
-        {%- for link in linklists[section.settings.sub_menu].links -%}
-          <a href="{{ link.url }}" class="custom-header__drawer-link">
-            {{- link.title | escape -}}
-          </a>
-        {%- endfor -%}
-      {%- endif -%}
-    </nav>
-  </div>
+  {%- comment -%} ===== SIDE DRAWER ===== {%- endcomment -%}
+  {% render 'side-drawer', section: section %}
 </custom-header-component>
 
 <script src="{{ 'custom-header.js' | asset_url }}" type="module" fetchpriority="low"></script>
+<script src="{{ 'side-drawer.js' | asset_url }}" type="module" fetchpriority="low"></script>
 
 {% schema %}
 {
@@ -465,6 +419,104 @@
       "step": 1,
       "default": 0,
       "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:content.side_drawer"
+    },
+    {
+      "type": "link_list",
+      "id": "drawer_menu",
+      "label": "t:settings.drawer_menu"
+    },
+    {
+      "type": "text",
+      "id": "brands_handle",
+      "label": "t:settings.brands_handle",
+      "default": "brands"
+    },
+    {
+      "type": "header",
+      "content": "t:content.features_links"
+    },
+    {
+      "type": "url",
+      "id": "track_orders_url",
+      "label": "t:settings.track_orders_url"
+    },
+    {
+      "type": "url",
+      "id": "reorder_items_url",
+      "label": "t:settings.reorder_items_url"
+    },
+    {
+      "type": "url",
+      "id": "help_url",
+      "label": "t:settings.help_url"
+    },
+    {
+      "type": "url",
+      "id": "home_shopping_list_url",
+      "label": "t:settings.home_shopping_list_url"
+    },
+    {
+      "type": "url",
+      "id": "list_manager_url",
+      "label": "t:settings.list_manager_url"
+    },
+    {
+      "type": "url",
+      "id": "egifts_url",
+      "label": "t:settings.egifts_url"
+    },
+    {
+      "type": "url",
+      "id": "price_alerts_url",
+      "label": "t:settings.price_alerts_url"
+    },
+    {
+      "type": "url",
+      "id": "shopbuddy_url",
+      "label": "t:settings.shopbuddy_url"
+    },
+    {
+      "type": "url",
+      "id": "deals_url",
+      "label": "t:settings.deals_url"
+    },
+    {
+      "type": "url",
+      "id": "nutri_physical_url",
+      "label": "t:settings.nutri_physical_url"
+    },
+    {
+      "type": "header",
+      "content": "t:content.account_links"
+    },
+    {
+      "type": "url",
+      "id": "social_facebook",
+      "label": "t:settings.social_facebook"
+    },
+    {
+      "type": "url",
+      "id": "social_x",
+      "label": "t:settings.social_x"
+    },
+    {
+      "type": "url",
+      "id": "social_instagram",
+      "label": "t:settings.social_instagram"
+    },
+    {
+      "type": "url",
+      "id": "social_tiktok",
+      "label": "t:settings.social_tiktok"
+    },
+    {
+      "type": "url",
+      "id": "social_youtube",
+      "label": "t:settings.social_youtube"
     }
   ]
 }
