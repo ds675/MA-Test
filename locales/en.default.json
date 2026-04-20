@@ -356,7 +356,7 @@
       "shop": "Shop",
       "account": "Account",
       "features": "Features",
-      "sign_in": "Sign In",
+      "sign_in": "Sign In / Create Account",
       "my_account": "My Account",
       "track_orders": "Track Orders",
       "reorder_items": "Reorder Items",
@@ -367,7 +367,7 @@
       "price_alerts": "Price Alerts",
       "shopbuddy": "ShopBuddy",
       "deals": "Deals",
-      "nutri_physical": "Nutri Physical",
+      "nutri_physical": "Nutri-Physical",
       "back": "Back",
       "close": "Close",
       "shop_all_brands": "Shop All Brands"

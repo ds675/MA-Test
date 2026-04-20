@@ -19,6 +19,9 @@ class SideDrawerComponent extends Component {
   /** @type {HTMLElement|null} */
   #triggerElement = null;
 
+  /** @type {string} */
+  #originalHeaderHTML = '';
+
   connectedCallback() {
     super.connectedCallback();
     document.addEventListener('side-drawer:open', this.#handleExternalOpen.bind(this));
@@ -148,10 +151,18 @@ class SideDrawerComponent extends Component {
     }
 
     if (headerTitle) {
-      const currentPanelId = this.#panelStack[this.#panelStack.length - 1];
-      const currentPanel = this.querySelector(`[data-panel-id="${currentPanelId}"]`);
-      const panelTitle = currentPanel?.getAttribute('data-panel-title') || '';
-      headerTitle.textContent = panelTitle;
+      if (!this.#originalHeaderHTML) {
+        this.#originalHeaderHTML = headerTitle.innerHTML;
+      }
+
+      if (this.#panelStack.length <= 1) {
+        headerTitle.innerHTML = this.#originalHeaderHTML;
+      } else {
+        const currentPanelId = this.#panelStack[this.#panelStack.length - 1];
+        const currentPanel = this.querySelector(`[data-panel-id="${currentPanelId}"]`);
+        const panelTitle = currentPanel?.getAttribute('data-panel-title') || '';
+        headerTitle.textContent = panelTitle;
+      }
     }
   }
 
@@ -190,6 +201,29 @@ class SideDrawerComponent extends Component {
   handleKeydown(event) {
     if (event.key === 'Escape') {
       this.close();
+      return;
+    }
+
+    if (event.key === 'Tab' && this.refs.drawer?.hasAttribute('data-active')) {
+      const focusableSelectors = 'a[href]:not([hidden]), button:not([hidden]):not([disabled]), input:not([hidden]):not([disabled]), select:not([hidden]):not([disabled]), textarea:not([hidden]):not([disabled]), [tabindex]:not([tabindex="-1"]):not([hidden])';
+      const focusableElements = [...this.refs.drawer.querySelectorAll(focusableSelectors)].filter(el => el.offsetParent !== null);
+
+      if (focusableElements.length === 0) return;
+
+      const firstFocusable = focusableElements[0];
+      const lastFocusable = focusableElements[focusableElements.length - 1];
+
+      if (event.shiftKey) {
+        if (document.activeElement === firstFocusable) {
+          event.preventDefault();
+          lastFocusable.focus();
+        }
+      } else {
+        if (document.activeElement === lastFocusable) {
+          event.preventDefault();
+          firstFocusable.focus();
+        }
+      }
     }
   }
 }
