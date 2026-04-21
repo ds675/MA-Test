@@ -25,11 +25,27 @@
     },
     "header_section": {
       "type": "custom-header",
+      "blocks": {
+        "account_link_En9bmX": {
+          "type": "account_link",
+          "settings": {
+            "title": "Sign In / Create Account",
+            "url": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "account_link_En9bmX"
+      ],
       "settings": {
         "desktop_menu": "header-desktop",
         "cta_text": "Take Quiz",
         "cta_url": "",
         "search_placeholder": "Search products",
+        "mobile_cta_image": "shopify://shop_images/uuid-417672b2-1f25-4f89-baac-6fbcc8241f09.png",
+        "mobile_cta_url": "",
+        "mobile_cta_label": "Account",
+        "side_menu": "side-menu",
         "sub_menu": "header-desktop",
         "promo_text": "$6,073,506,282 awarded in cash! Learn More",
         "promo_url": "",
