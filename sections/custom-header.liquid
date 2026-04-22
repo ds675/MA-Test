@@ -280,56 +280,8 @@
     </div>
   </div>
 
-  {%- comment -%} ===== DRAWER ===== {%- endcomment -%}
-  <div
-    ref="drawerOverlay"
-    class="custom-header__drawer-overlay"
-    on:click="/handleCloseDrawer"
-    aria-hidden="true"
-  ></div>
-
-  <div
-    ref="drawer"
-    class="custom-header__drawer"
-    role="dialog"
-    aria-modal="true"
-    aria-label="{{ 'sections.custom_header.menu' | t }}"
-    on:keydown="/handleDrawerKeydown"
-  >
-    <div class="custom-header__drawer-header">
-      <span class="custom-header__drawer-title">{{ 'sections.custom_header.menu' | t }}</span>
-      <button
-        ref="drawerClose"
-        class="custom-header__drawer-close"
-        type="button"
-        aria-label="{{ 'sections.custom_header.close' | t }}"
-        on:click="/handleCloseDrawer"
-      >
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M6 6L18 18M6 18L18 6" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-    </div>
-
-    <nav class="custom-header__drawer-nav" aria-label="{{ 'sections.custom_header.menu' | t }}">
-      {%- if section.settings.desktop_menu != blank -%}
-        {%- for link in linklists[section.settings.desktop_menu].links -%}
-          <a href="{{ link.url }}" class="custom-header__drawer-link">
-            {{- link.title | escape -}}
-          </a>
-        {%- endfor -%}
-      {%- endif -%}
-
-      {%- if section.settings.sub_menu != blank -%}
-        <span class="custom-header__drawer-nav-group-title">{{ 'sections.custom_header.departments' | t }}</span>
-        {%- for link in linklists[section.settings.sub_menu].links -%}
-          <a href="{{ link.url }}" class="custom-header__drawer-link">
-            {{- link.title | escape -}}
-          </a>
-        {%- endfor -%}
-      {%- endif -%}
-    </nav>
-  </div>
+  {%- comment -%} ===== DRAWER (multi-panel) ===== {%- endcomment -%}
+  {% render 'drawer-side-menu', section: section %}
 </custom-header-component>
 
 <script src="{{ 'custom-header.js' | asset_url }}" type="module" fetchpriority="low"></script>
@@ -401,6 +353,20 @@
     },
     {
       "type": "header",
+      "content": "t:content.side_menu"
+    },
+    {
+      "type": "link_list",
+      "id": "side_menu",
+      "label": "t:settings.side_menu"
+    },
+    {
+      "type": "url",
+      "id": "brands_all_url",
+      "label": "t:settings.brands_all_url"
+    },
+    {
+      "type": "header",
       "content": "t:content.sub_header"
     },
     {
@@ -465,6 +431,50 @@
       "step": 1,
       "default": 0,
       "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "account_link",
+      "name": "t:names.account_link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:settings.link_title"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "t:settings.link_icon"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "t:settings.link_url"
+        }
+      ]
+    },
+    {
+      "type": "feature_link",
+      "name": "t:names.feature_link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:settings.link_title"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "t:settings.link_icon"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "t:settings.link_url"
+        }
+      ]
     }
   ]
 }

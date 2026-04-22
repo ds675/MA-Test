@@ -154,7 +154,9 @@
     "navigation": "Navigation",
     "main_header": "Main header",
     "sub_header": "Sub-header",
-    "cta": "Call to action"
+    "cta": "Call to action",
+    "side_menu": "Side Menu",
+    "drawer_blocks": "Drawer Blocks"
   },
   "html_defaults": {
     "join_our_email_list": "<h2>Join our email list</h2>",
@@ -439,7 +441,9 @@
     "view_all_button": "View all",
     "pills": "Pills",
     "comparison_slider": "Comparison slider",
-    "custom_header": "Custom header"
+    "custom_header": "Custom header",
+    "account_link": "Account link",
+    "feature_link": "Feature link"
   },
   "options": {
     "above_carousel": "Above carousel",
@@ -1126,6 +1130,8 @@
     "statement": "Statement",
     "sticky_add_to_cart": "Sticky add to cart",
     "sticky_header": "Sticky header",
+    "side_menu": "Side menu",
+    "brands_all_url": "\"Shop All Brands\" URL",
     "sub_menu": "Sub-header menu",
     // Icon line thickness setting label
     "stroke": "Stroke",
@@ -1196,7 +1202,10 @@
     "cs_slider_inner_color": "Slider inner color",
     "text_on_images": "Text on images",
     "x_position": "Horizontal position",
-    "y_position": "Vertical position"
+    "y_position": "Vertical position",
+    "link_title": "Title",
+    "link_icon": "Icon",
+    "link_url": "URL"
   },
   "text_defaults": {
     "accordion_heading": "Accordion heading",
