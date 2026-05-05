@@ -1,0 +1,49 @@
+{% doc %}
+  PDP Short Description Block
+
+  Renders the product's short description from custom.short_description metafield.
+  Only renders when the metafield has a value.
+
+  @example
+  {% content_for 'block', type: '_pdp-short-description', id: 'pdp-short-desc' %}
+{% enddoc %}
+
+{%- liquid
+  assign short_desc = product.metafields.custom.short_description.value
+-%}
+
+{%- if short_desc != blank -%}
+  {{ 'pdp-buybox.css' | asset_url | stylesheet_tag }}
+  <div class="pdp-short-desc" {{ block.shopify_attributes }}>
+    <p class="pdp-short-desc__text">{{ short_desc | escape }}</p>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:names.pdp_short_description",
+  "tag": null,
+  "settings": [
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.padding_top",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.padding_bottom",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ]
+}
+{% endschema %}

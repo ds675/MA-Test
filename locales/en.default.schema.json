@@ -439,7 +439,14 @@
     "view_all_button": "View all",
     "pills": "Pills",
     "comparison_slider": "Comparison slider",
-    "custom_header": "Custom header"
+    "custom_header": "Custom header",
+    "pdp_badge": "Product badge",
+    "pdp_short_description": "Short description",
+    "pdp_per_serving": "Per serving price",
+    "pdp_featured_texts": "Featured texts",
+    "pdp_subscription": "Subscription widget",
+    "pdp_accordions": "Product accordions",
+    "pdp_featured_reviews": "Featured reviews"
   },
   "options": {
     "above_carousel": "Above carousel",
@@ -1196,7 +1203,22 @@
     "cs_slider_inner_color": "Slider inner color",
     "text_on_images": "Text on images",
     "x_position": "Horizontal position",
-    "y_position": "Vertical position"
+    "y_position": "Vertical position",
+    "badge_background_color": "Background color",
+    "badge_text_color": "Text color",
+    "discount_percentage": "Discount percentage",
+    "bullet_1": "Bullet 1",
+    "bullet_2": "Bullet 2",
+    "bullet_3": "Bullet 3",
+    "frequency_label": "Frequency label",
+    "frequency_options": "Frequency options",
+    "heading_details": "Details heading",
+    "heading_how_to_use": "How to use heading",
+    "heading_ingredients": "Ingredients heading",
+    "first_open": "Open first row by default",
+    "icon_type": "Icon type",
+    "stars_count": "Stars",
+    "per_serving_label": "Per serving label"
   },
   "text_defaults": {
     "accordion_heading": "Accordion heading",

@@ -1,0 +1,141 @@
+{% doc %}
+  PDP Subscription Widget Block
+
+  Renders a radio toggle between one-time purchase and subscribe & save options.
+  Subscribe option shows discount badge, merchant-editable bullets, and frequency select.
+  This is a UI-only block — actual subscription logic requires a third-party app.
+
+  @example
+  {% content_for 'block', type: '_pdp-subscription', id: 'pdp-subscription' %}
+{% enddoc %}
+
+{{ 'pdp-buybox.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign discount = block.settings.discount_percentage | default: 15
+  assign freq_options_raw = block.settings.frequency_options | default: '30 days,60 days,90 days'
+  assign freq_options = freq_options_raw | split: ','
+-%}
+
+<pdp-subscription class="pdp-subscription" {{ block.shopify_attributes }}>
+  <div class="pdp-subscription__options">
+    {%- comment -%} One-time purchase option {%- endcomment -%}
+    <div class="pdp-subscription__option" data-option="one-time" data-selected="true">
+      <label class="pdp-subscription__option-header">
+        <input
+          type="radio"
+          name="purchase_type_{{ block.id }}"
+          value="one-time"
+          class="pdp-subscription__radio"
+          checked
+          on:change="/handleSelectOption"
+        >
+        <span class="pdp-subscription__option-label">{{ 'sections.pdp_subscription.one_time_purchase' | t }}</span>
+      </label>
+    </div>
+
+    {%- comment -%} Subscribe & Save option {%- endcomment -%}
+    <div class="pdp-subscription__option" data-option="subscribe" data-selected="false">
+      <label class="pdp-subscription__option-header">
+        <input
+          type="radio"
+          name="purchase_type_{{ block.id }}"
+          value="subscribe"
+          class="pdp-subscription__radio"
+          on:change="/handleSelectOption"
+        >
+        <span class="pdp-subscription__option-label">{{ 'sections.pdp_subscription.subscribe_save' | t }}</span>
+        {%- if discount > 0 -%}
+          <span class="pdp-subscription__discount-badge">
+            {{ 'sections.pdp_subscription.save_label' | t }} {{ discount }}%
+          </span>
+        {%- endif -%}
+      </label>
+      <div class="pdp-subscription__details">
+        <ul class="pdp-subscription__bullets">
+          {%- if block.settings.bullet_1 != blank -%}
+            <li class="pdp-subscription__bullet">
+              <span class="pdp-subscription__bullet-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </span>
+              <span>{{ block.settings.bullet_1 | escape }}</span>
+            </li>
+          {%- endif -%}
+          {%- if block.settings.bullet_2 != blank -%}
+            <li class="pdp-subscription__bullet">
+              <span class="pdp-subscription__bullet-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </span>
+              <span>{{ block.settings.bullet_2 | escape }}</span>
+            </li>
+          {%- endif -%}
+          {%- if block.settings.bullet_3 != blank -%}
+            <li class="pdp-subscription__bullet">
+              <span class="pdp-subscription__bullet-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </span>
+              <span>{{ block.settings.bullet_3 | escape }}</span>
+            </li>
+          {%- endif -%}
+        </ul>
+        {%- if freq_options.size > 0 -%}
+          <div class="pdp-subscription__frequency">
+            <span class="pdp-subscription__frequency-label">{{ block.settings.frequency_label | default: 'Delivery Every' }}</span>
+            <select class="pdp-subscription__frequency-select" aria-label="{{ block.settings.frequency_label | default: 'Delivery Every' }}">
+              {%- for option in freq_options -%}
+                <option value="{{ option | strip | handleize }}">{{ option | strip }}</option>
+              {%- endfor -%}
+            </select>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</pdp-subscription>
+
+<script src="{{ 'pdp-buybox.js' | asset_url }}" type="module" fetchpriority="low"></script>
+
+{% schema %}
+{
+  "name": "t:names.pdp_subscription",
+  "tag": null,
+  "settings": [
+    {
+      "type": "number",
+      "id": "discount_percentage",
+      "label": "t:settings.discount_percentage",
+      "default": 15
+    },
+    {
+      "type": "text",
+      "id": "bullet_1",
+      "label": "t:settings.bullet_1",
+      "default": "Free Shipping on Every Order"
+    },
+    {
+      "type": "text",
+      "id": "bullet_2",
+      "label": "t:settings.bullet_2",
+      "default": "Easily Pause, Skip or Cancel"
+    },
+    {
+      "type": "text",
+      "id": "bullet_3",
+      "label": "t:settings.bullet_3",
+      "default": "Delivered to Your Door Monthly"
+    },
+    {
+      "type": "text",
+      "id": "frequency_label",
+      "label": "t:settings.frequency_label",
+      "default": "Delivery Every"
+    },
+    {
+      "type": "text",
+      "id": "frequency_options",
+      "label": "t:settings.frequency_options",
+      "default": "30 days,60 days,90 days"
+    }
+  ]
+}
+{% endschema %}

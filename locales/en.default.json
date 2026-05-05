@@ -341,6 +341,22 @@
     "blog_post_description": "An excerpt of your blog post's content"
   },
   "sections": {
+    "pdp_subscription": {
+      "one_time_purchase": "One-time Purchase",
+      "subscribe_save": "Subscribe & Save",
+      "save_label": "Save"
+    },
+    "pdp_per_serving": {
+      "per_serving": "Per Serving"
+    },
+    "pdp_accordions": {
+      "product_details": "Product Details",
+      "how_to_use": "How To Use",
+      "ingredients": "Ingredients"
+    },
+    "pdp_featured_reviews": {
+      "heading": "Featured Reviews"
+    },
     "custom_header": {
       "search_placeholder": "Search products",
       "sign_in": "Sign in",

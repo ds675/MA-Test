@@ -1,0 +1,178 @@
+{% doc %}
+  PDP Accordions Block
+
+  Renders collapsible accordion rows for Product Details (from product.description),
+  How To Use (from custom.how_to_use metafield), and Ingredients (from custom.ingredients metafield).
+  Each row only renders if its content source has a value.
+
+  @example
+  {% content_for 'block', type: '_pdp-accordions', id: 'pdp-accordions' %}
+{% enddoc %}
+
+{%- liquid
+  assign has_description = false
+  if product.description != blank
+    assign has_description = true
+  endif
+
+  assign has_how_to_use = false
+  if product.metafields.custom.how_to_use.value != blank
+    assign has_how_to_use = true
+  endif
+
+  assign has_ingredients = false
+  if product.metafields.custom.ingredients.value != blank
+    assign has_ingredients = true
+  endif
+
+  assign has_any_content = false
+  if has_description or has_how_to_use or has_ingredients
+    assign has_any_content = true
+  endif
+
+  assign first_open = block.settings.first_open
+-%}
+
+{%- if has_any_content -%}
+  {{ 'pdp-buybox.css' | asset_url | stylesheet_tag }}
+
+  <pdp-accordions class="pdp-accordions" {{ block.shopify_attributes }}>
+    {%- assign accordion_index = 0 -%}
+
+    {%- if has_description -%}
+      {%- assign is_open = false -%}
+      {%- if first_open and accordion_index == 0 -%}
+        {%- assign is_open = true -%}
+      {%- endif -%}
+      <div class="pdp-accordions__item">
+        <h3>
+          <button
+            class="pdp-accordions__header"
+            aria-expanded="{{ is_open }}"
+            aria-controls="PdpAccordion-details-{{ block.id }}"
+            on:click="/handleToggle"
+          >
+            <span>{{ block.settings.heading_details | default: 'Product Details' }}</span>
+            <span class="pdp-accordions__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </span>
+          </button>
+        </h3>
+        <div
+          id="PdpAccordion-details-{{ block.id }}"
+          class="pdp-accordions__content"
+          role="region"
+          aria-labelledby="PdpAccordion-details-{{ block.id }}-header"
+          data-open="{{ is_open }}"
+        >
+          <div class="pdp-accordions__content-inner">
+            {{ product.description }}
+          </div>
+        </div>
+      </div>
+      {%- assign accordion_index = accordion_index | plus: 1 -%}
+    {%- endif -%}
+
+    {%- if has_how_to_use -%}
+      {%- assign is_open = false -%}
+      {%- if first_open and accordion_index == 0 -%}
+        {%- assign is_open = true -%}
+      {%- endif -%}
+      <div class="pdp-accordions__item">
+        <h3>
+          <button
+            class="pdp-accordions__header"
+            aria-expanded="{{ is_open }}"
+            aria-controls="PdpAccordion-howto-{{ block.id }}"
+            on:click="/handleToggle"
+          >
+            <span>{{ block.settings.heading_how_to_use | default: 'How To Use' }}</span>
+            <span class="pdp-accordions__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </span>
+          </button>
+        </h3>
+        <div
+          id="PdpAccordion-howto-{{ block.id }}"
+          class="pdp-accordions__content"
+          role="region"
+          aria-labelledby="PdpAccordion-howto-{{ block.id }}-header"
+          data-open="{{ is_open }}"
+        >
+          <div class="pdp-accordions__content-inner">
+            {{ product.metafields.custom.how_to_use | metafield_tag }}
+          </div>
+        </div>
+      </div>
+      {%- assign accordion_index = accordion_index | plus: 1 -%}
+    {%- endif -%}
+
+    {%- if has_ingredients -%}
+      {%- assign is_open = false -%}
+      {%- if first_open and accordion_index == 0 -%}
+        {%- assign is_open = true -%}
+      {%- endif -%}
+      <div class="pdp-accordions__item">
+        <h3>
+          <button
+            class="pdp-accordions__header"
+            aria-expanded="{{ is_open }}"
+            aria-controls="PdpAccordion-ingredients-{{ block.id }}"
+            on:click="/handleToggle"
+          >
+            <span>{{ block.settings.heading_ingredients | default: 'Ingredients' }}</span>
+            <span class="pdp-accordions__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </span>
+          </button>
+        </h3>
+        <div
+          id="PdpAccordion-ingredients-{{ block.id }}"
+          class="pdp-accordions__content"
+          role="region"
+          aria-labelledby="PdpAccordion-ingredients-{{ block.id }}-header"
+          data-open="{{ is_open }}"
+        >
+          <div class="pdp-accordions__content-inner">
+            {{ product.metafields.custom.ingredients | metafield_tag }}
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+  </pdp-accordions>
+
+  <script src="{{ 'pdp-buybox.js' | asset_url }}" type="module" fetchpriority="low"></script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:names.pdp_accordions",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading_details",
+      "label": "t:settings.heading_details",
+      "default": "Product Details"
+    },
+    {
+      "type": "text",
+      "id": "heading_how_to_use",
+      "label": "t:settings.heading_how_to_use",
+      "default": "How To Use"
+    },
+    {
+      "type": "text",
+      "id": "heading_ingredients",
+      "label": "t:settings.heading_ingredients",
+      "default": "Ingredients"
+    },
+    {
+      "type": "checkbox",
+      "id": "first_open",
+      "label": "t:settings.first_open",
+      "default": true
+    }
+  ]
+}
+{% endschema %}
