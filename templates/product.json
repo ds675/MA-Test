@@ -67,6 +67,13 @@
             "padding-inline-end": 0
           },
           "blocks": {
+            "pdp_badge": {
+              "type": "_pdp-badge",
+              "settings": {
+                "badge_background_color": "#1a1a1a",
+                "badge_text_color": "#ffffff"
+              }
+            },
             "group_icgrde": {
               "type": "group",
               "name": "Header",
@@ -161,6 +168,26 @@
                 "price_tVjtKg"
               ]
             },
+            "pdp_short_desc": {
+              "type": "_pdp-short-description",
+              "settings": {
+                "padding-block-start": 0,
+                "padding-block-end": 0
+              }
+            },
+            "pdp_per_serving": {
+              "type": "_pdp-per-serving",
+              "settings": {
+                "per_serving_label": "Per Serving"
+              }
+            },
+            "pdp_featured_texts": {
+              "type": "_pdp-featured-texts",
+              "settings": {
+                "icon_type": "checkmark",
+                "icon_color": "#1a1a1a"
+              }
+            },
             "divider_VJhene": {
               "type": "_divider",
               "name": "t:names.divider",
@@ -185,6 +212,17 @@
                 "padding-inline-end": 0
               },
               "blocks": {}
+            },
+            "pdp_subscription": {
+              "type": "_pdp-subscription",
+              "settings": {
+                "discount_percentage": 15,
+                "bullet_1": "Free Shipping on Every Order",
+                "bullet_2": "Easily Pause, Skip or Cancel",
+                "bullet_3": "Delivered to Your Door Monthly",
+                "frequency_label": "Delivery Every",
+                "frequency_options": "30 days,60 days,90 days"
+              }
             },
             "buy_buttons_eYQEYi": {
               "type": "buy-buttons",
@@ -221,39 +259,27 @@
               },
               "block_order": []
             },
-            "text_aEtTtq": {
-              "type": "text",
-              "name": "Product description",
+            "pdp_accordions": {
+              "type": "_pdp-accordions",
               "settings": {
-                "text": "{{ closest.product.description }}",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-primary--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
+                "heading_details": "Product Details",
+                "heading_how_to_use": "How To Use",
+                "heading_ingredients": "Ingredients",
+                "first_open": true
+              }
             }
           },
           "block_order": [
+            "pdp_badge",
             "group_icgrde",
+            "pdp_short_desc",
+            "pdp_per_serving",
+            "pdp_featured_texts",
             "divider_VJhene",
             "variant_picker_R3rGDr",
+            "pdp_subscription",
             "buy_buttons_eYQEYi",
-            "text_aEtTtq"
+            "pdp_accordions"
           ]
         }
       },
@@ -275,7 +301,7 @@
           "type": "text",
           "name": "t:names.header",
           "settings": {
-            "text": "<h3>You may also like </h3>",
+            "text": "<h3>Pairs Well With</h3>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -408,10 +434,22 @@
         "padding-block-start": 48,
         "padding-block-end": 48
       }
+    },
+    "pdp_featured_reviews": {
+      "type": "pdp-featured-reviews",
+      "settings": {
+        "heading": "Featured Reviews",
+        "stars_count": 5,
+        "color_scheme": "scheme-1",
+        "section_width": "page-width",
+        "padding_block_start": 48,
+        "padding_block_end": 48
+      }
     }
   },
   "order": [
     "main",
-    "product_recommendations_qggXJq"
+    "product_recommendations_qggXJq",
+    "pdp_featured_reviews"
   ]
 }

@@ -1,0 +1,65 @@
+{% doc %}
+  PDP Per Serving Price Block
+
+  Calculates and displays the per-serving price based on the current variant price
+  and the variant's custom.serving metafield. Updates dynamically on variant change.
+
+  @example
+  {% content_for 'block', type: '_pdp-per-serving', id: 'pdp-per-serving' %}
+{% enddoc %}
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign serving_value = current_variant.metafields.custom.serving.value | default: 0
+
+  # Build JSON map of variant_id -> serving count for JS reactivity
+  assign serving_map = ''
+  for variant in product.variants
+    assign v_serving = variant.metafields.custom.serving.value | default: 0
+    if v_serving > 0
+      if serving_map != ''
+        assign serving_map = serving_map | append: ','
+      endif
+      assign serving_map = serving_map | append: '"' | append: variant.id | append: '":' | append: v_serving
+    endif
+  endfor
+  assign serving_map = '{' | append: serving_map | append: '}'
+
+  assign has_serving = false
+  if serving_value != 0 and serving_value != blank
+    assign has_serving = true
+  endif
+-%}
+
+{%- if has_serving or serving_map != '{}' -%}
+  {{ 'pdp-buybox.css' | asset_url | stylesheet_tag }}
+  <pdp-per-serving
+    class="pdp-per-serving"
+    data-serving-map="{{ serving_map | escape }}"
+    {{ block.shopify_attributes }}
+  >
+    {%- if has_serving -%}
+      {%- assign per_serving_price = current_variant.price | divided_by: serving_value -%}
+      <span class="pdp-per-serving__price" ref="perServingPrice">{{ per_serving_price | money }}</span>
+    {%- else -%}
+      <span class="pdp-per-serving__price" ref="perServingPrice"></span>
+    {%- endif -%}
+    <span class="pdp-per-serving__label">{{ block.settings.per_serving_label | default: 'Per Serving' }}</span>
+  </pdp-per-serving>
+  <script src="{{ 'pdp-buybox.js' | asset_url }}" type="module" fetchpriority="low"></script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:names.pdp_per_serving",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "per_serving_label",
+      "label": "t:settings.per_serving_label",
+      "default": "Per Serving"
+    }
+  ]
+}
+{% endschema %}

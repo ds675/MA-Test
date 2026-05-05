@@ -1,0 +1,62 @@
+{% doc %}
+  PDP Featured Texts Block
+
+  Renders a list of featured text items from the product's custom.featured_texts
+  metafield (list.single_line_text_field) with configurable icons.
+
+  @example
+  {% content_for 'block', type: '_pdp-featured-texts', id: 'pdp-featured-texts' %}
+{% enddoc %}
+
+{%- liquid
+  assign featured_texts = product.metafields.custom.featured_texts.value
+-%}
+
+{%- if featured_texts != blank and featured_texts.size > 0 -%}
+  {{ 'pdp-buybox.css' | asset_url | stylesheet_tag }}
+  <div class="pdp-featured-texts" {{ block.shopify_attributes }}>
+    <ul class="pdp-featured-texts__list">
+      {%- for text_item in featured_texts -%}
+        <li class="pdp-featured-texts__item">
+          <span class="pdp-featured-texts__icon" style="color: {{ block.settings.icon_color }};">
+            {%- case block.settings.icon_type -%}
+              {%- when 'checkmark' -%}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              {%- when 'bullet' -%}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle></svg>
+              {%- when 'star' -%}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            {%- endcase -%}
+          </span>
+          <span>{{ text_item | escape }}</span>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:names.pdp_featured_texts",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "icon_type",
+      "label": "t:settings.icon_type",
+      "options": [
+        { "value": "checkmark", "label": "Checkmark" },
+        { "value": "bullet", "label": "Bullet" },
+        { "value": "star", "label": "Star" }
+      ],
+      "default": "checkmark"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "t:settings.color",
+      "default": "#1a1a1a"
+    }
+  ]
+}
+{% endschema %}

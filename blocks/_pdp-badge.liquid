@@ -1,0 +1,46 @@
+{% doc %}
+  PDP Badge Block
+
+  Renders a styled badge pill from the product's custom.badge_text metafield.
+  Only renders when the metafield has a value.
+
+  @example
+  {% content_for 'block', type: '_pdp-badge', id: 'pdp-badge' %}
+{% enddoc %}
+
+{%- liquid
+  assign badge_text = product.metafields.custom.badge_text.value
+-%}
+
+{%- if badge_text != blank -%}
+  {{ 'pdp-buybox.css' | asset_url | stylesheet_tag }}
+  <div class="pdp-badge" {{ block.shopify_attributes }}>
+    <span
+      class="pdp-badge__pill"
+      style="background-color: {{ block.settings.badge_background_color }}; color: {{ block.settings.badge_text_color }};"
+    >
+      {{- badge_text | escape -}}
+    </span>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:names.pdp_badge",
+  "tag": null,
+  "settings": [
+    {
+      "type": "color",
+      "id": "badge_background_color",
+      "label": "t:settings.badge_background_color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "t:settings.badge_text_color",
+      "default": "#ffffff"
+    }
+  ]
+}
+{% endschema %}
