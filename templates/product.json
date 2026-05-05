@@ -268,6 +268,48 @@
         "padding-block-end": 0
       }
     },
+    "hero_timeline": {
+      "type": "hero-timeline",
+      "settings": {
+        "heading": "How It Works",
+        "subheading": "Follow these simple steps",
+        "background_color": "#ffffff",
+        "text_color": "#141414",
+        "dot_color": "#141414",
+        "line_color": "#dddddd",
+        "section_width": "page-width",
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      },
+      "blocks": {
+        "timeline_item_1": {
+          "type": "timeline-item",
+          "settings": {
+            "title": "Step 1",
+            "description": "Description for step one."
+          }
+        },
+        "timeline_item_2": {
+          "type": "timeline-item",
+          "settings": {
+            "title": "Step 2",
+            "description": "Description for step two."
+          }
+        },
+        "timeline_item_3": {
+          "type": "timeline-item",
+          "settings": {
+            "title": "Step 3",
+            "description": "Description for step three."
+          }
+        }
+      },
+      "block_order": [
+        "timeline_item_1",
+        "timeline_item_2",
+        "timeline_item_3"
+      ]
+    },
     "product_recommendations_qggXJq": {
       "type": "product-recommendations",
       "blocks": {
@@ -412,6 +454,7 @@
   },
   "order": [
     "main",
+    "hero_timeline",
     "product_recommendations_qggXJq"
   ]
 }

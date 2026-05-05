@@ -154,7 +154,8 @@
     "navigation": "Navigation",
     "main_header": "Main header",
     "sub_header": "Sub-header",
-    "cta": "Call to action"
+    "cta": "Call to action",
+    "timeline_items": "Timeline items"
   },
   "html_defaults": {
     "join_our_email_list": "<h2>Join our email list</h2>",
@@ -439,7 +440,8 @@
     "view_all_button": "View all",
     "pills": "Pills",
     "comparison_slider": "Comparison slider",
-    "custom_header": "Custom header"
+    "custom_header": "Custom header",
+    "hero_timeline": "Hero timeline"
   },
   "options": {
     "above_carousel": "Above carousel",
@@ -1196,7 +1198,13 @@
     "cs_slider_inner_color": "Slider inner color",
     "text_on_images": "Text on images",
     "x_position": "Horizontal position",
-    "y_position": "Vertical position"
+    "y_position": "Vertical position",
+    "subheading": "Subheading",
+    "background_image": "Background image",
+    "timeline_title": "Title",
+    "timeline_description": "Description",
+    "dot_color": "Dot color",
+    "line_color": "Line color"
   },
   "text_defaults": {
     "accordion_heading": "Accordion heading",
